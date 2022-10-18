@@ -8,9 +8,8 @@ describe('DrawSpaceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DrawSpaceComponent ]
-    })
-    .compileComponents();
+      declarations: [DrawSpaceComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

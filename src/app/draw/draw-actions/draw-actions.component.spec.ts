@@ -8,9 +8,8 @@ describe('DrawActionsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DrawActionsComponent ]
-    })
-    .compileComponents();
+      declarations: [DrawActionsComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
