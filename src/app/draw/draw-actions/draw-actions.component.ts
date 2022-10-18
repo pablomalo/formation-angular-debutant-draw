@@ -17,5 +17,5 @@ export class DrawActionsComponent implements OnInit {
     this.drawServices.penState.subscribe((state: boolean) => (this.isPenStateActive = state))
   }
 
-  penStateChange: Function = () => (this.drawServices.penStateChange());
+  togglePen: Function = () => (this.drawServices.togglePen());
 }
