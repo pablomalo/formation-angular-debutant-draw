@@ -1,5 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {fabric} from "fabric";
+import {DrawServicesService} from "../draw-services/draw-services.service";
 
 @Component({
   selector: 'app-draw-space',
@@ -10,9 +11,9 @@ export class DrawSpaceComponent implements OnInit {
 
   @ViewChild('drawSpace') canvasRef!: ElementRef;
 
-  protected _canvasFabric?: fabric.Canvas;
+  private _canvasFabric!: fabric.Canvas;
 
-  constructor() {
+  constructor(private readonly drawServices: DrawServicesService) {
   }
 
   ngOnInit(): void {
@@ -26,7 +27,6 @@ export class DrawSpaceComponent implements OnInit {
         height: 600
       }
     );
-    this._canvasFabric.isDrawingMode = true;
+    this.drawServices.penState.subscribe((state: boolean) => (this._canvasFabric.isDrawingMode = state));
   }
-
 }

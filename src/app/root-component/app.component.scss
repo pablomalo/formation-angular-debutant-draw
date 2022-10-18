@@ -1,14 +1,11 @@
 section {
   display: flex;
-  background: green;
   height: 600px;
   div {
     &.left {
-      background: red;
       flex: 20%;
     }
     &.right {
-      background: deepskyblue;
       flex: 80%;
     }
   }
