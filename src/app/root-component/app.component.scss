@@ -1,0 +1,15 @@
+section {
+  display: flex;
+  background: green;
+  height: 500px;
+  div {
+    &.left {
+      background: red;
+      flex: 20%;
+    }
+    &.right {
+      background: deepskyblue;
+      flex: 80%;
+    }
+  }
+}
