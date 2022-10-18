@@ -1,1 +1,1 @@
-<button (click)="penStateChange()">Stylo</button>
+<button [ngClass]="{'btn-active': isPenStateActive}" (click)="penStateChange()">Stylo</button>

@@ -8,13 +8,14 @@ import {DrawServicesService} from "../draw-services/draw-services.service";
 })
 export class DrawActionsComponent implements OnInit {
 
-  clickAction: Function = () => (alert('Clicked!'));
+  isPenStateActive: boolean = false;
 
   constructor(private readonly drawServices: DrawServicesService) {
   }
 
-  penStateChange: Function = () => (this.drawServices.penStateChange());
-
   ngOnInit(): void {
+    this.drawServices.penState.subscribe((state: boolean) => (this.isPenStateActive = state))
   }
+
+  penStateChange: Function = () => (this.drawServices.penStateChange());
 }
