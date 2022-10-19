@@ -24,6 +24,10 @@ export class DrawService {
     return this._penState$;
   }
 
+  public get activeColor(): BehaviorSubject<IColor> {
+    return this._activeColor$;
+  }
+
   initCanvas: Function = (): void => {
     this._canvasFabric = new fabric.Canvas('draw-space', {
       backgroundColor: 'lightgrey',
@@ -54,36 +58,46 @@ export class DrawService {
   }
 
   addShape: Function = (shapeCommand: IShapeCommand): void => {
+    const subscribeToActiveColor: Function = (
+      shape: fabric.Object,
+      colorProperty: string
+    ): void => {
+      this._activeColor$.subscribe(
+        (color: IColor) =>
+          (shape[colorProperty as keyof fabric.Object] = color.hexValue)
+      );
+    };
+
+    const mergeCommandDefaults: Function = (
+      shapeCommand: IShapeCommand
+    ): IShapeCommand => {
+      const shapeToDefaultsMap = {
+        [ShapeEnum.Rectangle]: ShapeDefaultsConstants.RECTANGLE,
+        [ShapeEnum.Circle]: ShapeDefaultsConstants.CIRCLE,
+        [ShapeEnum.Line]: ShapeDefaultsConstants.LINE,
+      };
+      return {
+        ...shapeToDefaultsMap[shapeCommand.shape],
+        ...shapeCommand,
+      } as IShapeCommand;
+    };
+
+    const mergedCommand: IShapeCommand = mergeCommandDefaults(shapeCommand);
+
     switch (shapeCommand.shape) {
       case ShapeEnum.Rectangle:
-        const rect = new fabric.Rect({
-          ...ShapeDefaultsConstants.RECTANGLE,
-          ...shapeCommand,
-        });
-        this._activeColor$.subscribe(
-          (color: IColor) => (rect.fill = color.hexValue)
-        );
+        const rect = new fabric.Rect(mergedCommand);
+        subscribeToActiveColor(rect, 'fill');
         this._canvasFabric.add(rect);
         break;
       case ShapeEnum.Circle:
-        const circle = new fabric.Circle({
-          ...ShapeDefaultsConstants.CIRCLE,
-          ...shapeCommand,
-        });
-        this._activeColor$.subscribe(
-          (color: IColor) => (circle.fill = color.hexValue)
-        );
+        const circle = new fabric.Circle(mergedCommand);
+        subscribeToActiveColor(circle, 'fill');
         this._canvasFabric.add(circle);
         break;
       case ShapeEnum.Line:
-        const mergedCommand = {
-          ...ShapeDefaultsConstants.LINE,
-          ...shapeCommand,
-        };
         const line = new fabric.Line(mergedCommand.points, mergedCommand);
-        this._activeColor$.subscribe(
-          (color: IColor) => (line.stroke = color.hexValue)
-        );
+        subscribeToActiveColor(line, 'stroke');
         this._canvasFabric.add(line);
         break;
     }

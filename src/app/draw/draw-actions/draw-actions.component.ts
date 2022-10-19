@@ -25,7 +25,7 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
 
   private _unsubscribe$: Subject<undefined> = new Subject<undefined>();
 
-  constructor(private readonly drawServices: DrawService) {}
+  constructor(readonly drawServices: DrawService) {}
 
   ngOnInit(): void {
     this.drawServices.penState

@@ -19,9 +19,9 @@ export class ColorConstants {
     this.GREEN,
     this.PURPLE,
     this.ORANGE,
-  ];
+  ].sort((a, b): number => a.name.localeCompare(b.name));
 
   static findColorByHexValue: Function = (hexValue: string): IColor =>
-    this.COLORS.find((color: IColor) => color.hexValue === hexValue) ??
+    this.COLORS.find((color) => color.hexValue === hexValue) ??
     ColorConstants.DEFAULT_COLOR;
 }
