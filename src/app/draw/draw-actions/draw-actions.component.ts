@@ -50,4 +50,12 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
       top: 75,
       radius: 30,
     });
+
+  onAddLine: Function = (): void =>
+    this.drawServices.addShape({
+      shape: Shape.Line,
+      points: [0, 0, 100, 100],
+      stroke: 'black',
+      strokeWidth: 2,
+    });
 }

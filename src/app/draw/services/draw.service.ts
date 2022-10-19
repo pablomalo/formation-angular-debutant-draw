@@ -39,6 +39,11 @@ export class DrawService {
       case Shape.Circle:
         this._canvasFabric.add(new fabric.Circle(shapeCommand));
         break;
+      case Shape.Line:
+        this._canvasFabric.add(
+          new fabric.Line(shapeCommand.points, shapeCommand)
+        );
+        break;
     }
   };
 }
