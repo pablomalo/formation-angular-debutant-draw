@@ -12,5 +12,6 @@ export class DrawServicesService {
     return this._penState$;
   }
 
-  togglePen: Function = () => this._penState$.next(!this._penState$.value);
+  togglePen: Function = (): void =>
+    this._penState$.next(!this._penState$.value);
 }

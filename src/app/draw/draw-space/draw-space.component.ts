@@ -34,11 +34,11 @@ export class DrawSpaceComponent implements OnInit, OnDestroy {
     this.drawServices.penState
       .pipe(
         takeUntil(this._unsubscribe$), // Jusqu'à ce que l'événement ait été déclenché au moins une fois.
-        tap((state: boolean) => console.log(state))
+        tap((state: boolean): void => console.log(state))
       )
-      .subscribe(
-        (state: boolean) => (this._canvasFabric.isDrawingMode = state)
-      );
+      .subscribe((state: boolean): void => {
+        this._canvasFabric.isDrawingMode = state;
+      });
   }
 
   ngOnDestroy(): void {

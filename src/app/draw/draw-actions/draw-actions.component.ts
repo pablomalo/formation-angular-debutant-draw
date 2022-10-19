@@ -17,7 +17,9 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.drawServices.penState
       .pipe(takeUntil(this._unsubscribe$))
-      .subscribe((state: boolean) => (this.isPenStateActive = state));
+      .subscribe((state: boolean): void => {
+        this.isPenStateActive = state;
+      });
   }
 
   ngOnDestroy(): void {
@@ -25,5 +27,5 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
     this._unsubscribe$.complete();
   }
 
-  onTogglePen: Function = () => this.drawServices.togglePen();
+  onTogglePen: Function = (): void => this.drawServices.togglePen();
 }
