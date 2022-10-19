@@ -36,9 +36,10 @@ export class DrawService {
       width: 800,
       height: 600,
     });
+    const freeDrawingBrush = this._canvasFabric.freeDrawingBrush;
+    freeDrawingBrush.width = 3;
     this._activeColor$.subscribe(
-      (color: IColor) =>
-        (this._canvasFabric.freeDrawingBrush.color = color.hexValue)
+      (color: IColor) => (freeDrawingBrush.color = color.hexValue)
     );
   };
 
@@ -51,9 +52,7 @@ export class DrawService {
 
   nextActiveColor(color: IColor | string): void {
     const nextColor =
-      'string' === typeof color
-        ? ColorConstants.findColorByHexValue(color)
-        : color;
+      'string' === typeof color ? ColorConstants.findByHexValue(color) : color;
     this._activeColor$.next(nextColor);
   }
 
@@ -61,22 +60,27 @@ export class DrawService {
     const mergedCommand: IShapeCommand =
       this._mergeCommandDefaults(shapeCommand);
 
-    switch (shapeCommand.shape) {
-      case ShapeEnum.Rectangle:
-        const rect = new fabric.Rect(mergedCommand);
-        this._subscribeToActiveColor(rect, 'fill');
-        this._canvasFabric.add(rect);
-        break;
-      case ShapeEnum.Circle:
-        const circle = new fabric.Circle(mergedCommand);
-        this._subscribeToActiveColor(circle, 'fill');
-        this._canvasFabric.add(circle);
-        break;
-      case ShapeEnum.Line:
-        const line = new fabric.Line(mergedCommand.points, mergedCommand);
-        this._subscribeToActiveColor(line, 'stroke');
-        this._canvasFabric.add(line);
-        break;
+    let obj: fabric.Object | null = ((): fabric.Object | null => {
+      switch (shapeCommand.shape) {
+        case ShapeEnum.Rectangle:
+          const rect = new fabric.Rect(mergedCommand);
+          this._subscribeToActiveColor(rect, 'fill');
+          return rect;
+        case ShapeEnum.Circle:
+          const circle = new fabric.Circle(mergedCommand);
+          this._subscribeToActiveColor(circle, 'fill');
+          return circle;
+        case ShapeEnum.Line:
+          const line = new fabric.Line(mergedCommand.points, mergedCommand);
+          this._subscribeToActiveColor(line, 'stroke');
+          return line;
+        default:
+          return null;
+      }
+    })();
+
+    if (obj) {
+      this._canvasFabric.add(obj);
     }
   };
 
