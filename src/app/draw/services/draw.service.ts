@@ -11,17 +11,20 @@ import { IColor } from '../draw-actions/interfaces/color.interface';
   providedIn: 'root',
 })
 export class DrawService {
-  selectedColor: IColor = ColorConstants.DEFAULT_COLOR;
+  private _canvasFabric!: fabric.Canvas;
 
   private readonly _penState$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
-  private _canvasFabric!: fabric.Canvas;
+
+  private _activeColor$: BehaviorSubject<IColor> = new BehaviorSubject<IColor>(
+    ColorConstants.DEFAULT_COLOR
+  );
 
   public get penState(): BehaviorSubject<boolean> {
     return this._penState$;
   }
 
-  public initCanvas: Function = (): void => {
+  initCanvas: Function = (): void => {
     this._canvasFabric = new fabric.Canvas('draw-space', {
       backgroundColor: 'lightgrey',
       selection: false,
@@ -29,44 +32,59 @@ export class DrawService {
       width: 800,
       height: 600,
     });
+    this._activeColor$.subscribe(
+      (color: IColor) =>
+        (this._canvasFabric.freeDrawingBrush.color = color.hexValue)
+    );
   };
+
+  nextActiveColor(color: IColor | string): void {
+    const newColor =
+      'string' === typeof color
+        ? ColorConstants.findColorByHexValue(color)
+        : color;
+    this._activeColor$.next(newColor);
+  }
 
   togglePen: Function = (): void => {
     this._penState$.next(!this._penState$.value);
     this._canvasFabric.isDrawingMode = this._penState$.value;
-    this._canvasFabric.freeDrawingBrush.color = this.selectedColor.hexValue;
+    this._canvasFabric.freeDrawingBrush.color =
+      this._activeColor$.value.hexValue;
   };
 
   addShape: Function = (shapeCommand: IShapeCommand): void => {
     switch (shapeCommand.shape) {
       case ShapeEnum.Rectangle:
-        this._canvasFabric.add(
-          new fabric.Rect({
-            ...ShapeDefaultsConstants.RECTANGLE,
-            ...shapeCommand,
-            fill: this.selectedColor.hexValue,
-          })
+        const rect = new fabric.Rect({
+          ...ShapeDefaultsConstants.RECTANGLE,
+          ...shapeCommand,
+        });
+        this._activeColor$.subscribe(
+          (color: IColor) => (rect.fill = color.hexValue)
         );
+        this._canvasFabric.add(rect);
         break;
       case ShapeEnum.Circle:
-        this._canvasFabric.add(
-          new fabric.Circle({
-            ...ShapeDefaultsConstants.CIRCLE,
-            ...shapeCommand,
-            fill: this.selectedColor.hexValue,
-          })
+        const circle = new fabric.Circle({
+          ...ShapeDefaultsConstants.CIRCLE,
+          ...shapeCommand,
+        });
+        this._activeColor$.subscribe(
+          (color: IColor) => (circle.fill = color.hexValue)
         );
+        this._canvasFabric.add(circle);
         break;
       case ShapeEnum.Line:
         const mergedCommand = {
           ...ShapeDefaultsConstants.LINE,
           ...shapeCommand,
-          stroke: this.selectedColor.hexValue,
         };
-        console.log(shapeCommand, ShapeDefaultsConstants.LINE, mergedCommand);
-        this._canvasFabric.add(
-          new fabric.Line(mergedCommand.points, mergedCommand)
+        const line = new fabric.Line(mergedCommand.points, mergedCommand);
+        this._activeColor$.subscribe(
+          (color: IColor) => (line.stroke = color.hexValue)
         );
+        this._canvasFabric.add(line);
         break;
     }
   };

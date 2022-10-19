@@ -20,4 +20,8 @@ export class ColorConstants {
     this.PURPLE,
     this.ORANGE,
   ];
+
+  static findColorByHexValue: Function = (hexValue: string): IColor =>
+    this.COLORS.find((color: IColor) => color.hexValue === hexValue) ??
+    ColorConstants.DEFAULT_COLOR;
 }

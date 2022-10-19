@@ -59,9 +59,6 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
 
   // TODO Stricter typing on $event
   onColorSelect($event: any) {
-    this.drawServices.selectedColor =
-      ColorConstants.COLORS.find(
-        (color: IColor) => color.hexValue === $event.target.value
-      ) ?? ColorConstants.DEFAULT_COLOR;
+    this.drawServices.nextActiveColor($event.target.value);
   }
 }
