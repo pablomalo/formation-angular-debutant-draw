@@ -28,7 +28,7 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
   constructor(readonly drawServices: DrawService) {}
 
   ngOnInit(): void {
-    this.drawServices.penState
+    this.drawServices.penState$
       .pipe(takeUntil(this._unsubscribe$))
       .subscribe((state: boolean): void => {
         this.isPenStateActive = state;

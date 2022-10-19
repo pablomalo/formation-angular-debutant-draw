@@ -5,6 +5,6 @@
 
 <select #colorSelect (change)="onColorSelect($event)" id="color-select">
   <option *ngFor="let colorOption of colorOptions"
-          [selected]="colorOption.hexValue === drawServices.activeColor.value.hexValue"
+          [selected]="colorOption.hexValue === drawServices.activeColor$.value.hexValue"
           [value]="colorOption.hexValue">{{ colorOption.name | titlecase }}</option>
 </select>

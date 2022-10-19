@@ -20,12 +20,12 @@ export class DrawService {
     ColorConstants.DEFAULT_COLOR
   );
 
-  public get penState(): BehaviorSubject<boolean> {
-    return this._penState$;
+  public get activeColor$(): BehaviorSubject<IColor> {
+    return this._activeColor$;
   }
 
-  public get activeColor(): BehaviorSubject<IColor> {
-    return this._activeColor$;
+  public get penState$(): BehaviorSubject<boolean> {
+    return this._penState$;
   }
 
   initCanvas: Function = (): void => {
