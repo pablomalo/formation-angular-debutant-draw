@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { fabric } from 'fabric';
 import { Shape } from '../draw-actions/enums/shape';
-import { ShapeCommand } from '../draw-actions/interface/shape-command';
+import { ShapeCommand } from '../draw-actions/interfaces/shape-command';
 
 @Injectable({
   providedIn: 'root',

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DrawServicesService } from '../draw-services/draw-services.service';
+import { DrawServicesService } from '../services/draw-services.service';
 
 @Component({
   selector: 'app-draw-space',
