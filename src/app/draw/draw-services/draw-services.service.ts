@@ -5,13 +5,12 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class DrawServicesService {
-  private _penState: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
-    false
-  );
+  private readonly _penState$: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(false);
 
   public get penState(): BehaviorSubject<boolean> {
-    return this._penState;
+    return this._penState$;
   }
 
-  togglePen: Function = () => this._penState.next(!this._penState.value);
+  togglePen: Function = () => this._penState$.next(!this._penState$.value);
 }
