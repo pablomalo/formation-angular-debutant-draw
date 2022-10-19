@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { DrawServicesService } from '../services/draw-services.service';
+import { DrawService } from '../services/draw.service';
 
 @Component({
   selector: 'app-draw-space',
@@ -9,7 +9,7 @@ import { DrawServicesService } from '../services/draw-services.service';
 export class DrawSpaceComponent implements OnInit {
   @ViewChild('drawSpace') canvasRef!: ElementRef;
 
-  constructor(private readonly drawServices: DrawServicesService) {}
+  constructor(private readonly drawServices: DrawService) {}
 
   ngOnInit(): void {
     this.drawServices.initCanvas();

@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DrawServicesService } from '../services/draw-services.service';
+import { DrawService } from '../services/draw.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Shape } from './enums/shape';
 
@@ -13,7 +13,7 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
 
   private _unsubscribe$: Subject<undefined> = new Subject<undefined>();
 
-  constructor(private readonly drawServices: DrawServicesService) {}
+  constructor(private readonly drawServices: DrawService) {}
 
   ngOnInit(): void {
     this.drawServices.penState

@@ -7,7 +7,7 @@ import { ShapeCommand } from '../draw-actions/interfaces/shape-command';
 @Injectable({
   providedIn: 'root',
 })
-export class DrawServicesService {
+export class DrawService {
   private readonly _penState$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
   private _canvasFabric!: fabric.Canvas;
