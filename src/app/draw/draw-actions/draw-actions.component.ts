@@ -45,18 +45,23 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
   onAddRectangle: Function = (): void =>
     this.drawServices.addShape({
       shape: ShapeEnum.Rectangle,
-      fill: this.colorSelect.nativeElement.value,
     });
 
   onAddCircle: Function = (): void =>
     this.drawServices.addShape({
       shape: ShapeEnum.Circle,
-      fill: this.colorSelect.nativeElement.value,
     });
 
   onAddLine: Function = (): void =>
     this.drawServices.addShape({
       shape: ShapeEnum.Line,
-      stroke: this.colorSelect.nativeElement.value,
     });
+
+  // TODO Stricter typing on $event
+  onColorSelect($event: any) {
+    this.drawServices.selectedColor =
+      ColorConstants.COLORS.find(
+        (color: IColor) => color.hexValue === $event.target.value
+      ) ?? ColorConstants.DEFAULT_COLOR;
+  }
 }

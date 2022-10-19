@@ -3,7 +3,7 @@
 <button (click)="onAddCircle()" [disabled]="isPenStateActive">{{ '+ Cercle' }}</button>
 <button (click)="onAddLine()" [disabled]="isPenStateActive">{{ '+ Ligne' }}</button>
 
-<select #colorSelect id="color-select">
+<select #colorSelect (change)="onColorSelect($event)" id="color-select">
   <option *ngFor="let colorOption of colorOptions"
           [value]="colorOption.hexValue">{{ colorOption.name | titlecase }}</option>
 </select>

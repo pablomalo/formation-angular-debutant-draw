@@ -4,11 +4,15 @@ import { fabric } from 'fabric';
 import { ShapeEnum } from '../draw-actions/enums/shape.enum';
 import { IShapeCommand } from '../draw-actions/interfaces/shape-command.interface';
 import { ShapeDefaultsConstants } from '../draw-actions/constants/shape-defaults.constants';
+import { ColorConstants } from '../draw-actions/constants/color.constants';
+import { IColor } from '../draw-actions/interfaces/color.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DrawService {
+  selectedColor: IColor = ColorConstants.DEFAULT_COLOR;
+
   private readonly _penState$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
   private _canvasFabric!: fabric.Canvas;
@@ -30,6 +34,7 @@ export class DrawService {
   togglePen: Function = (): void => {
     this._penState$.next(!this._penState$.value);
     this._canvasFabric.isDrawingMode = this._penState$.value;
+    this._canvasFabric.freeDrawingBrush.color = this.selectedColor.hexValue;
   };
 
   addShape: Function = (shapeCommand: IShapeCommand): void => {
@@ -39,6 +44,7 @@ export class DrawService {
           new fabric.Rect({
             ...ShapeDefaultsConstants.RECTANGLE,
             ...shapeCommand,
+            fill: this.selectedColor.hexValue,
           })
         );
         break;
@@ -47,6 +53,7 @@ export class DrawService {
           new fabric.Circle({
             ...ShapeDefaultsConstants.CIRCLE,
             ...shapeCommand,
+            fill: this.selectedColor.hexValue,
           })
         );
         break;
@@ -54,6 +61,7 @@ export class DrawService {
         const mergedCommand = {
           ...ShapeDefaultsConstants.LINE,
           ...shapeCommand,
+          stroke: this.selectedColor.hexValue,
         };
         console.log(shapeCommand, ShapeDefaultsConstants.LINE, mergedCommand);
         this._canvasFabric.add(
