@@ -39,11 +39,11 @@ export class DrawService {
   };
 
   nextActiveColor(color: IColor | string): void {
-    const newColor =
+    const nextColor =
       'string' === typeof color
         ? ColorConstants.findColorByHexValue(color)
         : color;
-    this._activeColor$.next(newColor);
+    this._activeColor$.next(nextColor);
   }
 
   togglePen: Function = (): void => {
