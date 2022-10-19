@@ -9,6 +9,6 @@ export class ButtonActiveDirective implements OnChanges {
   constructor(private el: ElementRef) {}
 
   ngOnChanges(): void {
-    this.el.nativeElement.classList.toggle(this.btnActive);
+    this.el.nativeElement.classList.toggle('active', this.btnActive);
   }
 }
