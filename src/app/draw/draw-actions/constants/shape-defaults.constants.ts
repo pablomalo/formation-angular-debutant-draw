@@ -25,7 +25,7 @@ export class ShapeDefaultsConstants {
   static readonly LINE: IShapeCommand = {
     shape: ShapeEnum.Line,
     stroke: ColorConstants.DEFAULT_COLOR.hexValue,
-    points: [0, 0, 100, 100],
-    strokeWidth: 2,
+    points: [0, 0, 300, 100],
+    strokeWidth: 3,
   };
 }
