@@ -38,6 +38,13 @@ export class DrawService {
     );
   };
 
+  togglePen: Function = (): void => {
+    this._penState$.next(!this._penState$.value);
+    this._canvasFabric.isDrawingMode = this._penState$.value;
+    this._canvasFabric.freeDrawingBrush.color =
+      this._activeColor$.value.hexValue;
+  };
+
   nextActiveColor(color: IColor | string): void {
     const nextColor =
       'string' === typeof color
@@ -45,13 +52,6 @@ export class DrawService {
         : color;
     this._activeColor$.next(nextColor);
   }
-
-  togglePen: Function = (): void => {
-    this._penState$.next(!this._penState$.value);
-    this._canvasFabric.isDrawingMode = this._penState$.value;
-    this._canvasFabric.freeDrawingBrush.color =
-      this._activeColor$.value.hexValue;
-  };
 
   addShape: Function = (shapeCommand: IShapeCommand): void => {
     switch (shapeCommand.shape) {
