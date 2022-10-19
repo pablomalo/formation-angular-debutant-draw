@@ -1,7 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { DrawService } from '../services/draw.service';
 import { Subject, takeUntil } from 'rxjs';
 import { Shape } from './enums/shape';
+import { Color } from './interfaces/color';
+import { ColorConstants } from './constants/color.constants';
 
 @Component({
   selector: 'app-draw-actions',
@@ -9,7 +17,11 @@ import { Shape } from './enums/shape';
   styleUrls: ['./draw-actions.component.scss'],
 })
 export class DrawActionsComponent implements OnInit, OnDestroy {
+  @ViewChild('colorSelect') colorSelect!: ElementRef;
+
   isPenStateActive: boolean = false;
+
+  colorOptions: Color[] = ColorConstants.COLORS;
 
   private _unsubscribe$: Subject<undefined> = new Subject<undefined>();
 
@@ -33,29 +45,18 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
   onAddRectangle: Function = (): void =>
     this.drawServices.addShape({
       shape: Shape.Rectangle,
-      width: 100,
-      height: 100,
-      fill: 'blue',
-      opacity: 1,
-      left: 10,
-      top: 35,
+      fill: this.colorSelect.nativeElement.value,
     });
 
   onAddCircle: Function = (): void =>
     this.drawServices.addShape({
       shape: Shape.Circle,
-      fill: 'red',
-      opacity: 1,
-      left: 50,
-      top: 75,
-      radius: 30,
+      fill: this.colorSelect.nativeElement.value,
     });
 
   onAddLine: Function = (): void =>
     this.drawServices.addShape({
       shape: Shape.Line,
-      points: [0, 0, 100, 100],
-      stroke: 'black',
-      strokeWidth: 2,
+      stroke: this.colorSelect.nativeElement.value,
     });
 }

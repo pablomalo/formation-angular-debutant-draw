@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { fabric } from 'fabric';
 import { Shape } from '../draw-actions/enums/shape';
 import { ShapeCommand } from '../draw-actions/interfaces/shape-command';
+import { ShapeDefaultsConstants } from '../draw-actions/constants/shape-defaults.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -34,14 +35,29 @@ export class DrawService {
   addShape: Function = (shapeCommand: ShapeCommand): void => {
     switch (shapeCommand.shape) {
       case Shape.Rectangle:
-        this._canvasFabric.add(new fabric.Rect(shapeCommand));
+        this._canvasFabric.add(
+          new fabric.Rect({
+            ...ShapeDefaultsConstants.RECTANGLE,
+            ...shapeCommand,
+          })
+        );
         break;
       case Shape.Circle:
-        this._canvasFabric.add(new fabric.Circle(shapeCommand));
+        this._canvasFabric.add(
+          new fabric.Circle({
+            ...ShapeDefaultsConstants.CIRCLE,
+            ...shapeCommand,
+          })
+        );
         break;
       case Shape.Line:
+        const mergedCommand = {
+          ...ShapeDefaultsConstants.LINE,
+          ...shapeCommand,
+        };
+        console.log(shapeCommand, ShapeDefaultsConstants.LINE, mergedCommand);
         this._canvasFabric.add(
-          new fabric.Line(shapeCommand.points, shapeCommand)
+          new fabric.Line(mergedCommand.points, mergedCommand)
         );
         break;
     }

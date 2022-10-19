@@ -11,4 +11,5 @@ export interface ShapeCommand {
   points?: number[];
   stroke?: string;
   strokeWidth?: number;
+  opacity?: number;
 }
