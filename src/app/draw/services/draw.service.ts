@@ -58,48 +58,49 @@ export class DrawService {
   }
 
   addShape: Function = (shapeCommand: IShapeCommand): void => {
-    const subscribeToActiveColor: Function = (
-      shape: fabric.Object,
-      colorProperty: string
-    ): void => {
-      this._activeColor$.subscribe(
-        (color: IColor) =>
-          (shape[colorProperty as keyof fabric.Object] = color.hexValue)
-      );
-    };
-
-    const mergeCommandDefaults: Function = (
-      shapeCommand: IShapeCommand
-    ): IShapeCommand => {
-      const shapeToDefaultsMap = {
-        [ShapeEnum.Rectangle]: ShapeDefaultsConstants.RECTANGLE,
-        [ShapeEnum.Circle]: ShapeDefaultsConstants.CIRCLE,
-        [ShapeEnum.Line]: ShapeDefaultsConstants.LINE,
-      };
-      return {
-        ...shapeToDefaultsMap[shapeCommand.shape],
-        ...shapeCommand,
-      } as IShapeCommand;
-    };
-
-    const mergedCommand: IShapeCommand = mergeCommandDefaults(shapeCommand);
+    const mergedCommand: IShapeCommand =
+      this._mergeCommandDefaults(shapeCommand);
 
     switch (shapeCommand.shape) {
       case ShapeEnum.Rectangle:
         const rect = new fabric.Rect(mergedCommand);
-        subscribeToActiveColor(rect, 'fill');
+        this._subscribeToActiveColor(rect, 'fill');
         this._canvasFabric.add(rect);
         break;
       case ShapeEnum.Circle:
         const circle = new fabric.Circle(mergedCommand);
-        subscribeToActiveColor(circle, 'fill');
+        this._subscribeToActiveColor(circle, 'fill');
         this._canvasFabric.add(circle);
         break;
       case ShapeEnum.Line:
         const line = new fabric.Line(mergedCommand.points, mergedCommand);
-        subscribeToActiveColor(line, 'stroke');
+        this._subscribeToActiveColor(line, 'stroke');
         this._canvasFabric.add(line);
         break;
     }
+  };
+
+  private _subscribeToActiveColor: Function = (
+    shape: fabric.Object,
+    colorProperty: string
+  ): void => {
+    this._activeColor$.subscribe(
+      (color: IColor) =>
+        (shape[colorProperty as keyof fabric.Object] = color.hexValue)
+    );
+  };
+
+  private _mergeCommandDefaults: Function = (
+    shapeCommand: IShapeCommand
+  ): IShapeCommand => {
+    const shapeToDefaultsMap = {
+      [ShapeEnum.Rectangle]: ShapeDefaultsConstants.RECTANGLE,
+      [ShapeEnum.Circle]: ShapeDefaultsConstants.CIRCLE,
+      [ShapeEnum.Line]: ShapeDefaultsConstants.LINE,
+    };
+    return {
+      ...shapeToDefaultsMap[shapeCommand.shape],
+      ...shapeCommand,
+    } as IShapeCommand;
   };
 }
