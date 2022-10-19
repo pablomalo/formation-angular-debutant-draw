@@ -1,10 +1,10 @@
 import { ColorConstants } from './color.constants';
-import { ShapeCommand } from '../interfaces/shape-command';
-import { Shape } from '../enums/shape';
+import { IShapeCommand } from '../interfaces/shape-command.interface';
+import { ShapeEnum } from '../enums/shape.enum';
 
 export class ShapeDefaultsConstants {
-  static readonly RECTANGLE: ShapeCommand = {
-    shape: Shape.Rectangle,
+  static readonly RECTANGLE: IShapeCommand = {
+    shape: ShapeEnum.Rectangle,
     fill: ColorConstants.DEFAULT_COLOR.hexValue,
     width: 100,
     height: 100,
@@ -13,8 +13,8 @@ export class ShapeDefaultsConstants {
     top: 35,
   };
 
-  static readonly CIRCLE: ShapeCommand = {
-    shape: Shape.Circle,
+  static readonly CIRCLE: IShapeCommand = {
+    shape: ShapeEnum.Circle,
     fill: ColorConstants.DEFAULT_COLOR.hexValue,
     opacity: 1,
     left: 50,
@@ -22,8 +22,8 @@ export class ShapeDefaultsConstants {
     radius: 30,
   };
 
-  static readonly LINE: ShapeCommand = {
-    shape: Shape.Line,
+  static readonly LINE: IShapeCommand = {
+    shape: ShapeEnum.Line,
     stroke: ColorConstants.DEFAULT_COLOR.hexValue,
     points: [0, 0, 100, 100],
     strokeWidth: 2,

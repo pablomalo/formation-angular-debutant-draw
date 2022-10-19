@@ -1,7 +1,7 @@
-import { Shape } from '../enums/shape';
+import { ShapeEnum } from '../enums/shape.enum';
 
-export interface ShapeCommand {
-  shape: Shape;
+export interface IShapeCommand {
+  shape: ShapeEnum;
   left?: number;
   top?: number;
   width?: number;

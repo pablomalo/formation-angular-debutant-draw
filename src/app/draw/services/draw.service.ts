@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { fabric } from 'fabric';
-import { Shape } from '../draw-actions/enums/shape';
-import { ShapeCommand } from '../draw-actions/interfaces/shape-command';
+import { ShapeEnum } from '../draw-actions/enums/shape.enum';
+import { IShapeCommand } from '../draw-actions/interfaces/shape-command.interface';
 import { ShapeDefaultsConstants } from '../draw-actions/constants/shape-defaults.constants';
 
 @Injectable({
@@ -32,9 +32,9 @@ export class DrawService {
     this._canvasFabric.isDrawingMode = this._penState$.value;
   };
 
-  addShape: Function = (shapeCommand: ShapeCommand): void => {
+  addShape: Function = (shapeCommand: IShapeCommand): void => {
     switch (shapeCommand.shape) {
-      case Shape.Rectangle:
+      case ShapeEnum.Rectangle:
         this._canvasFabric.add(
           new fabric.Rect({
             ...ShapeDefaultsConstants.RECTANGLE,
@@ -42,7 +42,7 @@ export class DrawService {
           })
         );
         break;
-      case Shape.Circle:
+      case ShapeEnum.Circle:
         this._canvasFabric.add(
           new fabric.Circle({
             ...ShapeDefaultsConstants.CIRCLE,
@@ -50,7 +50,7 @@ export class DrawService {
           })
         );
         break;
-      case Shape.Line:
+      case ShapeEnum.Line:
         const mergedCommand = {
           ...ShapeDefaultsConstants.LINE,
           ...shapeCommand,

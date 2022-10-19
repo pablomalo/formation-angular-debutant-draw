@@ -7,8 +7,8 @@ import {
 } from '@angular/core';
 import { DrawService } from '../services/draw.service';
 import { Subject, takeUntil } from 'rxjs';
-import { Shape } from './enums/shape';
-import { Color } from './interfaces/color';
+import { ShapeEnum } from './enums/shape.enum';
+import { IColor } from './interfaces/color.interface';
 import { ColorConstants } from './constants/color.constants';
 
 @Component({
@@ -21,7 +21,7 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
 
   isPenStateActive: boolean = false;
 
-  colorOptions: Color[] = ColorConstants.COLORS;
+  colorOptions: IColor[] = ColorConstants.COLORS;
 
   private _unsubscribe$: Subject<undefined> = new Subject<undefined>();
 
@@ -44,19 +44,19 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
 
   onAddRectangle: Function = (): void =>
     this.drawServices.addShape({
-      shape: Shape.Rectangle,
+      shape: ShapeEnum.Rectangle,
       fill: this.colorSelect.nativeElement.value,
     });
 
   onAddCircle: Function = (): void =>
     this.drawServices.addShape({
-      shape: Shape.Circle,
+      shape: ShapeEnum.Circle,
       fill: this.colorSelect.nativeElement.value,
     });
 
   onAddLine: Function = (): void =>
     this.drawServices.addShape({
-      shape: Shape.Line,
+      shape: ShapeEnum.Line,
       stroke: this.colorSelect.nativeElement.value,
     });
 }
