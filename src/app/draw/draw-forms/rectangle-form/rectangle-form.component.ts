@@ -13,11 +13,11 @@ import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.inter
 export class RectangleFormComponent extends AbstractFormDirective {
   protected addControls(): void {
     this.parentFormGroup.addControl(
-      'posX',
+      'left',
       new FormControl(ShapeDefaultsConstants.RECTANGLE.left)
     );
     this.parentFormGroup.addControl(
-      'posY',
+      'top',
       new FormControl(ShapeDefaultsConstants.RECTANGLE.top)
     );
     this.parentFormGroup.addControl(
@@ -33,8 +33,8 @@ export class RectangleFormComponent extends AbstractFormDirective {
   protected buildShape(): IShapeCommand {
     return {
       shape: ShapeEnum.Rectangle,
-      left: this.parentFormGroup.get('posX')?.value,
-      top: this.parentFormGroup.get('posY')?.value,
+      left: this.parentFormGroup.get('left')?.value,
+      top: this.parentFormGroup.get('top')?.value,
       fill: this.parentFormGroup.get('color')?.value.hexValue,
       width: this.parentFormGroup.get('width')?.value,
       height: this.parentFormGroup.get('height')?.value,

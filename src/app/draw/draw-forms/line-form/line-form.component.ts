@@ -13,7 +13,7 @@ import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.inter
 export class LineFormComponent extends AbstractFormDirective {
   protected addControls(): void {
     this.parentFormGroup.addControl(
-      'ptAposX',
+      'coordAX',
       new FormControl(
         ShapeDefaultsConstants.LINE.points
           ? ShapeDefaultsConstants.LINE.points[0]
@@ -21,7 +21,7 @@ export class LineFormComponent extends AbstractFormDirective {
       )
     );
     this.parentFormGroup.addControl(
-      'ptAposY',
+      'coordAY',
       new FormControl(
         ShapeDefaultsConstants.LINE.points
           ? ShapeDefaultsConstants.LINE.points[1]
@@ -29,7 +29,7 @@ export class LineFormComponent extends AbstractFormDirective {
       )
     );
     this.parentFormGroup.addControl(
-      'ptBposX',
+      'coordBX',
       new FormControl(
         ShapeDefaultsConstants.LINE.points
           ? ShapeDefaultsConstants.LINE.points[2]
@@ -37,7 +37,7 @@ export class LineFormComponent extends AbstractFormDirective {
       )
     );
     this.parentFormGroup.addControl(
-      'ptBposY',
+      'coordBY',
       new FormControl(
         ShapeDefaultsConstants.LINE.points
           ? ShapeDefaultsConstants.LINE.points[3]
@@ -55,10 +55,10 @@ export class LineFormComponent extends AbstractFormDirective {
       shape: ShapeEnum.Line,
       stroke: this.parentFormGroup.get('color')?.value.hexValue,
       points: [
-        this.parentFormGroup.get('ptAposX')?.value,
-        this.parentFormGroup.get('ptAposY')?.value,
-        this.parentFormGroup.get('ptBposX')?.value,
-        this.parentFormGroup.get('ptBposY')?.value,
+        this.parentFormGroup.get('coordAX')?.value,
+        this.parentFormGroup.get('coordAY')?.value,
+        this.parentFormGroup.get('coordBX')?.value,
+        this.parentFormGroup.get('coordBY')?.value,
       ],
       strokeWidth: this.parentFormGroup.get('strokeWidth')?.value,
     } as IShapeCommand;
