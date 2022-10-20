@@ -1,14 +1,14 @@
 import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
 
 @Directive({
-  selector: '[btnActive]',
+  selector: '[appBtnActive]',
 })
 export class ButtonActiveDirective implements OnChanges {
-  @Input() btnActive: boolean = false;
+  @Input() appBtnActive: boolean = false;
 
   constructor(private el: ElementRef) {}
 
   ngOnChanges(): void {
-    this.el.nativeElement.classList.toggle('active', this.btnActive);
+    this.el.nativeElement.classList.toggle('active', this.appBtnActive);
   }
 }
