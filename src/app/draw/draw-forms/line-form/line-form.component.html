@@ -2,19 +2,19 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
   <mat-form-field appearance="fill">
     <mat-label>Point A, position X</mat-label>
-    <input formControlName="ptAposX" matInput/>
+    <input formControlName="ptAposX" matInput required type="number"/>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Point A, position Y</mat-label>
-    <input formControlName="ptAposY" matInput/>
+    <input formControlName="ptAposY" matInput required type="number"/>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Point B, position X</mat-label>
-    <input formControlName="ptBposX" matInput/>
+    <input formControlName="ptBposX" matInput required type="number"/>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Point B, position Y</mat-label>
-    <input formControlName="ptBposY" matInput/>
+    <input formControlName="ptBposY" matInput required type="number"/>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Couleur</mat-label>
@@ -25,7 +25,7 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Epaisseur</mat-label>
-    <input formControlName="strokeWidth" matInput/>
+    <input formControlName="strokeWidth" matInput required type="number"/>
   </mat-form-field>
   <button [disabled]="!formGroup.valid" color="primary" mat-raised-button
           type="submit">Ajouter

@@ -2,11 +2,11 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
   <mat-form-field appearance="fill">
     <mat-label>Position X</mat-label>
-    <input formControlName="posX" matInput/>
+    <input formControlName="posX" matInput required type="number"/>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Position Y</mat-label>
-    <input formControlName="posY" matInput/>
+    <input formControlName="posY" matInput required type="number"/>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Couleur</mat-label>
@@ -17,7 +17,7 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Rayon</mat-label>
-    <input formControlName="radius" matInput/>
+    <input formControlName="radius" matInput required type="number"/>
   </mat-form-field>
   <button [disabled]="!formGroup.valid" color="primary" mat-raised-button
           type="submit">Ajouter

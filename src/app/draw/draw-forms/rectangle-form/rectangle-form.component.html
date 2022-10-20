@@ -1,11 +1,11 @@
 <form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
   <mat-form-field appearance="fill">
     <mat-label>Position X</mat-label>
-    <input formControlName="posX" matInput/>
+    <input formControlName="posX" matInput required type="number"/>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Position Y</mat-label>
-    <input formControlName="posY" matInput/>
+    <input formControlName="posY" matInput required type="number"/>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Couleur</mat-label>
@@ -16,11 +16,11 @@
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Largeur</mat-label>
-    <input formControlName="width" matInput/>
+    <input formControlName="width" matInput required type="number"/>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Height</mat-label>
-    <input formControlName="height" matInput/>
+    <input formControlName="height" matInput required type="number"/>
   </mat-form-field>
   <button [disabled]="!formGroup.valid" color="primary" mat-raised-button
           type="submit">Ajouter

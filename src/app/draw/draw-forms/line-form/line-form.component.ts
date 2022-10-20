@@ -45,6 +45,19 @@ export class LineFormComponent implements OnInit {
   ) {}
 
   onSubmit(): void {
+    console.log(
+      JSON.stringify({
+        shape: ShapeEnum.Line,
+        stroke: this.activeColor.hexValue,
+        points: [
+          this.formGroup.get('ptAposX')?.value,
+          this.formGroup.get('ptAposY')?.value,
+          this.formGroup.get('ptBposX')?.value,
+          this.formGroup.get('ptBposY')?.value,
+        ],
+        strokeWidth: this.formGroup.get('strokeWidth')?.value,
+      })
+    );
     this.drawServices.addShape({
       shape: ShapeEnum.Line,
       stroke: this.activeColor.hexValue,
