@@ -5,9 +5,7 @@ import { ShapeEnum } from './enums/shape.enum';
 import { IColor } from './interfaces/color.interface';
 import { ColorConstants } from './constants/color.constants';
 import { MatDialog } from '@angular/material/dialog';
-import { RectangleFormComponent } from '../draw-forms/rectangle-form/rectangle-form.component';
-import { LineFormComponent } from '../draw-forms/line-form/line-form.component';
-import { CircleFormComponent } from '../draw-forms/circle-form/circle-form.component';
+import { FormContainerComponent } from '../draw-forms/form-container/form-container.component';
 
 @Component({
   selector: 'app-draw-actions',
@@ -21,10 +19,10 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
 
   ShapeEnum = ShapeEnum;
 
-  private _unsubscribe$: Subject<undefined> = new Subject<undefined>();
+  private _unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
-    readonly drawServices: DrawService,
+    private readonly drawServices: DrawService,
     private readonly dialog: MatDialog
   ) {}
 
@@ -60,18 +58,8 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
   onTogglePen: Function = (): void => this.drawServices.togglePen();
 
   onOpenDialog: Function = (shape: ShapeEnum): void => {
-    switch (shape) {
-      case ShapeEnum.Rectangle:
-        this.dialog.open(RectangleFormComponent);
-        break;
-      case ShapeEnum.Circle:
-        this.dialog.open(CircleFormComponent);
-        break;
-      case ShapeEnum.Line:
-        this.dialog.open(LineFormComponent);
-        break;
-      default:
-        break;
-    }
+    this.dialog.open(FormContainerComponent, {
+      data: { shape: shape },
+    });
   };
 }

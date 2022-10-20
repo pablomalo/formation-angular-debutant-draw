@@ -1,45 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ShapeDefaultsConstants } from '../../draw-actions/constants/shape-defaults.constants';
-import { IColor } from '../../draw-actions/interfaces/color.interface';
-import { ColorConstants } from '../../draw-actions/constants/color.constants';
-import { MatDialogRef } from '@angular/material/dialog';
-import { DrawService } from '../../services/draw.service';
 import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
+import { AbstractFormDirective } from '../abstract-form/abstract-form.directive';
+import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.interface';
 
 @Component({
   selector: 'app-circle-form',
   templateUrl: './circle-form.component.html',
   styleUrls: ['./circle-form.component.scss'],
 })
-export class CircleFormComponent implements OnInit {
-  formGroup: FormGroup = new FormGroup({
-    posX: new FormControl(ShapeDefaultsConstants.CIRCLE.left),
-    posY: new FormControl(ShapeDefaultsConstants.CIRCLE.top),
-    radius: new FormControl(ShapeDefaultsConstants.CIRCLE.radius),
-  });
-  colorOptions: IColor[] = ColorConstants.COLORS;
-  activeColor: IColor = ColorConstants.DEFAULT_COLOR;
+export class CircleFormComponent extends AbstractFormDirective {
+  protected addControls(): void {
+    this.parentForm.addControl(
+      'posX',
+      new FormControl(ShapeDefaultsConstants.CIRCLE.left)
+    );
+    this.parentForm.addControl(
+      'posY',
+      new FormControl(ShapeDefaultsConstants.CIRCLE.top)
+    );
+    this.parentForm.addControl(
+      'radius',
+      new FormControl(ShapeDefaultsConstants.CIRCLE.radius)
+    );
+  }
 
-  constructor(
-    private readonly dialogRef: MatDialogRef<CircleFormComponent>,
-    private readonly drawServices: DrawService
-  ) {}
-
-  onSubmit(): void {
-    this.drawServices.addShape({
+  protected buildShape(): IShapeCommand {
+    return {
       shape: ShapeEnum.Circle,
-      left: this.formGroup.get('posX')?.value,
-      top: this.formGroup.get('posY')?.value,
-      fill: this.activeColor.hexValue,
-      radius: this.formGroup.get('radius')?.value,
-    });
-    this.dialogRef.close();
+      left: this.parentForm.get('posX')?.value,
+      top: this.parentForm.get('posY')?.value,
+      fill: this.parentForm.get('color')?.value.hexValue,
+      radius: this.parentForm.get('radius')?.value,
+    } as IShapeCommand;
   }
-
-  onCancel(): void {
-    this.dialogRef.close();
-  }
-
-  ngOnInit(): void {}
 }

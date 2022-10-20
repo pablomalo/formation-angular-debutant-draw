@@ -15,7 +15,7 @@ export class DrawService implements OnDestroy {
 
   private readonly _penState$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
-  private _unsubscribe$: Subject<undefined> = new Subject<undefined>();
+  private _unsubscribe$: Subject<void> = new Subject<void>();
 
   private _activeColor$: BehaviorSubject<IColor> = new BehaviorSubject<IColor>(
     ColorConstants.DEFAULT_COLOR

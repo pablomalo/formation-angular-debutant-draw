@@ -1,0 +1,23 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="containerForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Couleur</mat-label>
+    <mat-select formControlName="color">
+      <mat-option *ngFor="let colorOption of colorOptions"
+                  [value]="colorOption">{{ colorOption.name | titlecase }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <app-circle-form *ngIf="data.shape === ShapeEnum.Circle" [parentForm]="containerForm"
+                   [submitEvent$]="submitSubject$.asObservable()"></app-circle-form>
+  <app-rectangle-form *ngIf="data.shape === ShapeEnum.Rectangle" [parentForm]="containerForm"
+                      [submitEvent$]="submitSubject$.asObservable()"></app-rectangle-form>
+  <app-line-form *ngIf="data.shape === ShapeEnum.Line" [parentForm]="containerForm"
+                 [submitEvent$]="submitSubject$.asObservable()"></app-line-form>
+
+  <button [disabled]="!containerForm.valid" color="primary" mat-raised-button
+          type="submit">Ajouter
+  </button>
+  <button (click)="onCancel()" color="secondary"
+          mat-raised-button type='button'>Annuler
+  </button>
+</form>

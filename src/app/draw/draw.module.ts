@@ -13,6 +13,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RectangleFormComponent } from './draw-forms/rectangle-form/rectangle-form.component';
 import { LineFormComponent } from './draw-forms/line-form/line-form.component';
 import { CircleFormComponent } from './draw-forms/circle-form/circle-form.component';
+import { FormContainerComponent } from './draw-forms/form-container/form-container.component';
 
 @NgModule({
   providers: [DrawService],
@@ -24,6 +25,7 @@ import { CircleFormComponent } from './draw-forms/circle-form/circle-form.compon
     RectangleFormComponent,
     LineFormComponent,
     CircleFormComponent,
+    FormContainerComponent,
   ],
   imports: [
     CommonModule,
