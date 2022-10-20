@@ -1,4 +1,4 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="containerForm">
+<form (ngSubmit)="onSubmit()" [formGroup]="containerFormGroup">
   <mat-form-field appearance="fill">
     <mat-label>Couleur</mat-label>
     <mat-select formControlName="color">
@@ -7,14 +7,14 @@
     </mat-select>
   </mat-form-field>
 
-  <app-circle-form *ngIf="data.shape === ShapeEnum.Circle" [parentForm]="containerForm"
+  <app-circle-form *ngIf="data.shape === ShapeEnum.Circle" [parentFormGroup]="containerFormGroup"
                    [submitEvent$]="submitSubject$.asObservable()"></app-circle-form>
-  <app-rectangle-form *ngIf="data.shape === ShapeEnum.Rectangle" [parentForm]="containerForm"
+  <app-rectangle-form *ngIf="data.shape === ShapeEnum.Rectangle" [parentFormGroup]="containerFormGroup"
                       [submitEvent$]="submitSubject$.asObservable()"></app-rectangle-form>
-  <app-line-form *ngIf="data.shape === ShapeEnum.Line" [parentForm]="containerForm"
+  <app-line-form *ngIf="data.shape === ShapeEnum.Line" [parentFormGroup]="containerFormGroup"
                  [submitEvent$]="submitSubject$.asObservable()"></app-line-form>
 
-  <button [disabled]="!containerForm.valid" color="primary" mat-raised-button
+  <button [disabled]="!containerFormGroup.valid" color="primary" mat-raised-button
           type="submit">Ajouter
   </button>
   <button (click)="onCancel()" color="secondary"

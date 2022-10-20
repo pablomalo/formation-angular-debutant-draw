@@ -12,19 +12,19 @@ import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.inter
 })
 export class RectangleFormComponent extends AbstractFormDirective {
   protected addControls(): void {
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'posX',
       new FormControl(ShapeDefaultsConstants.RECTANGLE.left)
     );
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'posY',
       new FormControl(ShapeDefaultsConstants.RECTANGLE.top)
     );
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'width',
       new FormControl(ShapeDefaultsConstants.RECTANGLE.width)
     );
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'height',
       new FormControl(ShapeDefaultsConstants.RECTANGLE.height)
     );
@@ -33,11 +33,11 @@ export class RectangleFormComponent extends AbstractFormDirective {
   protected buildShape(): IShapeCommand {
     return {
       shape: ShapeEnum.Rectangle,
-      left: this.parentForm.get('posX')?.value,
-      top: this.parentForm.get('posY')?.value,
-      fill: this.parentForm.get('color')?.value.hexValue,
-      width: this.parentForm.get('width')?.value,
-      height: this.parentForm.get('height')?.value,
+      left: this.parentFormGroup.get('posX')?.value,
+      top: this.parentFormGroup.get('posY')?.value,
+      fill: this.parentFormGroup.get('color')?.value.hexValue,
+      width: this.parentFormGroup.get('width')?.value,
+      height: this.parentFormGroup.get('height')?.value,
     } as IShapeCommand;
   }
 }

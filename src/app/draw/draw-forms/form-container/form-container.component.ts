@@ -12,7 +12,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./form-container.component.scss'],
 })
 export class FormContainerComponent implements OnInit {
-  containerForm!: FormGroup;
+  containerFormGroup!: FormGroup;
   ShapeEnum: typeof ShapeEnum = ShapeEnum;
   colorOptions: IColor[] = ColorConstants.COLORS;
   submitSubject$: Subject<void> = new Subject<void>();
@@ -23,7 +23,7 @@ export class FormContainerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.containerForm = new FormGroup({
+    this.containerFormGroup = new FormGroup({
       color: new FormControl(ColorConstants.DEFAULT_COLOR),
     });
   }

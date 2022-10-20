@@ -12,7 +12,7 @@ import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.inter
 })
 export class LineFormComponent extends AbstractFormDirective {
   protected addControls(): void {
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'ptAposX',
       new FormControl(
         ShapeDefaultsConstants.LINE.points
@@ -20,7 +20,7 @@ export class LineFormComponent extends AbstractFormDirective {
           : 0
       )
     );
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'ptAposY',
       new FormControl(
         ShapeDefaultsConstants.LINE.points
@@ -28,7 +28,7 @@ export class LineFormComponent extends AbstractFormDirective {
           : 0
       )
     );
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'ptBposX',
       new FormControl(
         ShapeDefaultsConstants.LINE.points
@@ -36,7 +36,7 @@ export class LineFormComponent extends AbstractFormDirective {
           : 0
       )
     );
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'ptBposY',
       new FormControl(
         ShapeDefaultsConstants.LINE.points
@@ -44,7 +44,7 @@ export class LineFormComponent extends AbstractFormDirective {
           : 0
       )
     );
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'strokeWidth',
       new FormControl(ShapeDefaultsConstants.LINE.strokeWidth)
     );
@@ -53,14 +53,14 @@ export class LineFormComponent extends AbstractFormDirective {
   protected buildShape(): IShapeCommand {
     return {
       shape: ShapeEnum.Line,
-      stroke: this.parentForm.get('color')?.value.hexValue,
+      stroke: this.parentFormGroup.get('color')?.value.hexValue,
       points: [
-        this.parentForm.get('ptAposX')?.value,
-        this.parentForm.get('ptAposY')?.value,
-        this.parentForm.get('ptBposX')?.value,
-        this.parentForm.get('ptBposY')?.value,
+        this.parentFormGroup.get('ptAposX')?.value,
+        this.parentFormGroup.get('ptAposY')?.value,
+        this.parentFormGroup.get('ptBposX')?.value,
+        this.parentFormGroup.get('ptBposY')?.value,
       ],
-      strokeWidth: this.parentForm.get('strokeWidth')?.value,
+      strokeWidth: this.parentFormGroup.get('strokeWidth')?.value,
     } as IShapeCommand;
   }
 }

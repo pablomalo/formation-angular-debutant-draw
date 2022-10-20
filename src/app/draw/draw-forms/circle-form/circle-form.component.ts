@@ -12,15 +12,15 @@ import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.inter
 })
 export class CircleFormComponent extends AbstractFormDirective {
   protected addControls(): void {
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'posX',
       new FormControl(ShapeDefaultsConstants.CIRCLE.left)
     );
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'posY',
       new FormControl(ShapeDefaultsConstants.CIRCLE.top)
     );
-    this.parentForm.addControl(
+    this.parentFormGroup.addControl(
       'radius',
       new FormControl(ShapeDefaultsConstants.CIRCLE.radius)
     );
@@ -29,10 +29,10 @@ export class CircleFormComponent extends AbstractFormDirective {
   protected buildShape(): IShapeCommand {
     return {
       shape: ShapeEnum.Circle,
-      left: this.parentForm.get('posX')?.value,
-      top: this.parentForm.get('posY')?.value,
-      fill: this.parentForm.get('color')?.value.hexValue,
-      radius: this.parentForm.get('radius')?.value,
+      left: this.parentFormGroup.get('posX')?.value,
+      top: this.parentFormGroup.get('posY')?.value,
+      fill: this.parentFormGroup.get('color')?.value.hexValue,
+      radius: this.parentFormGroup.get('radius')?.value,
     } as IShapeCommand;
   }
 }

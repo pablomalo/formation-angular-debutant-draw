@@ -6,7 +6,7 @@ import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.inter
 
 @Directive()
 export abstract class AbstractFormDirective implements OnInit {
-  @Input() parentForm!: FormGroup;
+  @Input() parentFormGroup!: FormGroup;
   @Input() submitEvent$!: Observable<void>;
   private _unsubscribe$: Subject<void> = new Subject<void>();
 
