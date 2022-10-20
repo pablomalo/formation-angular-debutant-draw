@@ -18,11 +18,11 @@ export class CircleFormComponent extends AbstractFormDirective {
   protected addControls(): void {
     this.parentFormGroup.addControl(
       'left',
-      new FormControl(this.shapeDefaults.left)
+      new FormControl(this.shapeDefaults.left, this.coordinateXValidator())
     );
     this.parentFormGroup.addControl(
       'top',
-      new FormControl(this.shapeDefaults.top)
+      new FormControl(this.shapeDefaults.top, this.coordinateYValidator())
     );
     this.parentFormGroup.addControl(
       'radius',

@@ -18,25 +18,29 @@ export class LineFormComponent extends AbstractFormDirective {
     this.parentFormGroup.addControl(
       'coordAX',
       new FormControl(
-        this.shapeDefaults.points ? this.shapeDefaults.points[0] : 0
+        this.shapeDefaults.points ? this.shapeDefaults.points[0] : 0,
+        this.coordinateXValidator()
       )
     );
     this.parentFormGroup.addControl(
       'coordAY',
       new FormControl(
-        this.shapeDefaults.points ? this.shapeDefaults.points[1] : 0
+        this.shapeDefaults.points ? this.shapeDefaults.points[1] : 0,
+        this.coordinateYValidator()
       )
     );
     this.parentFormGroup.addControl(
       'coordBX',
       new FormControl(
-        this.shapeDefaults.points ? this.shapeDefaults.points[2] : 0
+        this.shapeDefaults.points ? this.shapeDefaults.points[2] : 0,
+        this.coordinateXValidator()
       )
     );
     this.parentFormGroup.addControl(
       'coordBY',
       new FormControl(
-        this.shapeDefaults.points ? this.shapeDefaults.points[3] : 0
+        this.shapeDefaults.points ? this.shapeDefaults.points[3] : 0,
+        this.coordinateYValidator()
       )
     );
     this.parentFormGroup.addControl(

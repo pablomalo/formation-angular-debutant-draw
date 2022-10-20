@@ -6,6 +6,7 @@ import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.inter
 import { ShapeDefaultsConstants } from '../../draw-actions/constants/shape-defaults.constants';
 import { ColorConstants } from '../../draw-actions/constants/color.constants';
 import { IColor } from '../../draw-actions/interfaces/color.interface';
+import { SizeConstants } from '../../draw-actions/constants/size.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -39,8 +40,8 @@ export class DrawService implements OnDestroy {
       backgroundColor: 'lightgrey',
       selection: false,
       preserveObjectStacking: true,
-      width: 800,
-      height: 600,
+      width: SizeConstants.CANVAS_WIDTH,
+      height: SizeConstants.CANVAS_HEIGHT,
     });
     const freeDrawingBrush = this._canvasFabric.freeDrawingBrush;
     freeDrawingBrush.width = 3;
