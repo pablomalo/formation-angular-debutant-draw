@@ -1,0 +1,36 @@
+<
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+  <mat-form-field appearance="fill">
+    <mat-label>Point A, position X</mat-label>
+    <input formControlName="ptAposX" matInput/>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Point A, position Y</mat-label>
+    <input formControlName="ptAposY" matInput/>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Point B, position X</mat-label>
+    <input formControlName="ptBposX" matInput/>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Point B, position Y</mat-label>
+    <input formControlName="ptBposY" matInput/>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Couleur</mat-label>
+    <mat-select #colorSelect [(ngModel)]="activeColor" [ngModelOptions]="{standalone: true}" id="color-select">
+      <mat-option *ngFor="let colorOption of colorOptions"
+                  [value]="colorOption">{{ colorOption.name | titlecase }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Epaisseur</mat-label>
+    <input formControlName="strokeWidth" matInput/>
+  </mat-form-field>
+  <button [disabled]="!formGroup.valid" color="primary" mat-raised-button
+          type="submit">Ajouter
+  </button>
+  <button color="secondary"
+          mat-raised-button>Annuler
+  </button>
+</form>

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { fabric } from 'fabric';
 import { ShapeEnum } from '../draw-actions/enums/shape.enum';
 import { IShapeCommand } from '../draw-actions/interfaces/shape-command.interface';
@@ -10,11 +10,12 @@ import { IColor } from '../draw-actions/interfaces/color.interface';
 @Injectable({
   providedIn: 'root',
 })
-export class DrawService {
+export class DrawService implements OnDestroy {
   private _canvasFabric!: fabric.Canvas;
 
   private readonly _penState$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
+  private _unsubscribe$: Subject<undefined> = new Subject<undefined>();
 
   private _activeColor$: BehaviorSubject<IColor> = new BehaviorSubject<IColor>(
     ColorConstants.DEFAULT_COLOR
@@ -28,6 +29,11 @@ export class DrawService {
     return this._penState$;
   }
 
+  ngOnDestroy(): void {
+    this._unsubscribe$.next(undefined);
+    this._unsubscribe$.complete();
+  }
+
   initCanvas: Function = (): void => {
     this._canvasFabric = new fabric.Canvas('draw-space', {
       backgroundColor: 'lightgrey',
@@ -38,9 +44,9 @@ export class DrawService {
     });
     const freeDrawingBrush = this._canvasFabric.freeDrawingBrush;
     freeDrawingBrush.width = 3;
-    this._activeColor$.subscribe(
-      (color: IColor) => (freeDrawingBrush.color = color.hexValue)
-    );
+    this._activeColor$
+      .pipe(takeUntil(this._unsubscribe$))
+      .subscribe((color: IColor) => (freeDrawingBrush.color = color.hexValue));
   };
 
   togglePen: Function = (): void => {
@@ -63,17 +69,14 @@ export class DrawService {
     let obj: fabric.Object | null = ((): fabric.Object | null => {
       switch (shapeCommand.shape) {
         case ShapeEnum.Rectangle:
-          const rect = new fabric.Rect(mergedCommand);
-          this._subscribeToActiveColor(rect, 'fill');
-          return rect;
+          // this._subscribeToActiveColor(rect, 'fill');
+          return new fabric.Rect(mergedCommand);
         case ShapeEnum.Circle:
-          const circle = new fabric.Circle(mergedCommand);
-          this._subscribeToActiveColor(circle, 'fill');
-          return circle;
+          // this._subscribeToActiveColor(circle, 'fill');
+          return new fabric.Circle(mergedCommand);
         case ShapeEnum.Line:
-          const line = new fabric.Line(mergedCommand.points, mergedCommand);
-          this._subscribeToActiveColor(line, 'stroke');
-          return line;
+          // this._subscribeToActiveColor(line, 'stroke');
+          return new fabric.Line(mergedCommand.points, mergedCommand);
         default:
           return null;
       }
@@ -84,14 +87,17 @@ export class DrawService {
     }
   };
 
+  // TODO Remove me
   private _subscribeToActiveColor: Function = (
     shape: fabric.Object,
     colorProperty: string
   ): void => {
-    this._activeColor$.subscribe(
-      (color: IColor) =>
-        (shape[colorProperty as keyof fabric.Object] = color.hexValue)
-    );
+    this._activeColor$
+      .pipe(takeUntil(this._unsubscribe$))
+      .subscribe(
+        (color: IColor) =>
+          (shape[colorProperty as keyof fabric.Object] = color.hexValue)
+      );
   };
 
   private _mergeCommandDefaults: Function = (

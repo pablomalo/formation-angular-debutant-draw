@@ -1,0 +1,29 @@
+<
+<form (ngSubmit)="onSubmit()" [formGroup]="formGroup">
+  <mat-form-field appearance="fill">
+    <mat-label>Position X</mat-label>
+    <input formControlName="posX" matInput/>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Position Y</mat-label>
+    <input formControlName="posY" matInput/>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Couleur</mat-label>
+    <mat-select #colorSelect [(ngModel)]="activeColor" [ngModelOptions]="{standalone: true}" id="color-select">
+      <mat-option *ngFor="let colorOption of colorOptions"
+                  [value]="colorOption">{{ colorOption.name | titlecase }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Rayon</mat-label>
+    <input formControlName="radius" matInput/>
+  </mat-form-field>
+  <button [disabled]="!formGroup.valid" color="primary" mat-raised-button
+          type="submit">Ajouter
+  </button>
+  <button color="secondary"
+          mat-raised-button>Annuler
+  </button>
+</form>
+

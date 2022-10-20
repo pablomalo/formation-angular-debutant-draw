@@ -3,23 +3,23 @@
           mat-raised-button>{{ 'Stylo' | uppercase }}</button>
 </div>
 <div>
-  <button (click)="onAddRectangle()" [disabled]="isPenStateActive" color="primary"
-          mat-raised-button>{{ '+ Rectangle' }}</button>
-</div>
-<div>
-  <button (click)="onAddCircle()" [disabled]="isPenStateActive" color="primary"
-          mat-raised-button>{{ '+ Cercle' }}</button>
-</div>
-<div>
-  <button (click)="onAddLine()" [disabled]="isPenStateActive" color="primary"
-          mat-raised-button>{{ '+ Ligne' }}</button>
-</div>
-<div>
   <mat-form-field appearance="fill">
-    <mat-label>Select</mat-label>
-    <mat-select #colorSelect [(ngModel)]="activeColor" id="color-select-2">
+    <mat-label>Couleur de trait</mat-label>
+    <mat-select #colorSelect [(ngModel)]="activeColor" [disabled]="!isPenStateActive" id="color-select">
       <mat-option *ngFor="let colorOption of colorOptions"
                   [value]="colorOption">{{ colorOption.name | titlecase }}</mat-option>
     </mat-select>
   </mat-form-field>
+</div>
+<div>
+  <button (click)="onOpenDialog(ShapeEnum.Rectangle)" [disabled]="isPenStateActive" color="primary"
+          mat-raised-button>{{ '+ Rectangle' }}</button>
+</div>
+<div>
+  <button (click)="onOpenDialog(ShapeEnum.Circle)" [disabled]="isPenStateActive" color="primary"
+          mat-raised-button>{{ '+ Cercle' }}</button>
+</div>
+<div>
+  <button (click)="onOpenDialog(ShapeEnum.Line)" [disabled]="isPenStateActive" color="primary"
+          mat-raised-button>{{ '+ Ligne' }}</button>
 </div>

@@ -4,6 +4,10 @@ import { Subject, takeUntil } from 'rxjs';
 import { ShapeEnum } from './enums/shape.enum';
 import { IColor } from './interfaces/color.interface';
 import { ColorConstants } from './constants/color.constants';
+import { MatDialog } from '@angular/material/dialog';
+import { RectangleFormComponent } from '../draw-forms/rectangle-form/rectangle-form.component';
+import { LineFormComponent } from '../draw-forms/line-form/line-form.component';
+import { CircleFormComponent } from '../draw-forms/circle-form/circle-form.component';
 
 @Component({
   selector: 'app-draw-actions',
@@ -14,9 +18,15 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
   isPenStateActive: boolean = false;
 
   colorOptions: IColor[] = ColorConstants.COLORS;
+
+  ShapeEnum = ShapeEnum;
+
   private _unsubscribe$: Subject<undefined> = new Subject<undefined>();
 
-  constructor(readonly drawServices: DrawService) {}
+  constructor(
+    readonly drawServices: DrawService,
+    private readonly dialog: MatDialog
+  ) {}
 
   private _activeColor!: IColor;
 
@@ -35,9 +45,11 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
         this.isPenStateActive = state;
       });
 
-    this.drawServices.activeColor$.subscribe((color: IColor): void => {
-      this._activeColor = color;
-    });
+    this.drawServices.activeColor$
+      .pipe(takeUntil(this._unsubscribe$))
+      .subscribe((color: IColor): void => {
+        this._activeColor = color;
+      });
   }
 
   ngOnDestroy(): void {
@@ -47,17 +59,28 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
 
   onTogglePen: Function = (): void => this.drawServices.togglePen();
 
-  onAddRectangle: Function = (): void =>
-    this.drawServices.addShape({
-      shape: ShapeEnum.Rectangle,
-    });
+  onOpenDialog: Function = (shape: ShapeEnum): void => {
+    switch (shape) {
+      case ShapeEnum.Rectangle:
+        this.dialog.open(RectangleFormComponent);
+        break;
+      case ShapeEnum.Circle:
+        this.dialog.open(CircleFormComponent);
+        break;
+      case ShapeEnum.Line:
+        this.dialog.open(LineFormComponent);
+        break;
+      default:
+        break;
+    }
+  };
 
   onAddCircle: Function = (): void =>
     this.drawServices.addShape({
       shape: ShapeEnum.Circle,
     });
 
-  onAddLine: Function = (): void =>
+  onOpenDialogLine: Function = (): void =>
     this.drawServices.addShape({
       shape: ShapeEnum.Line,
     });

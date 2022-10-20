@@ -10,6 +10,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RectangleFormComponent } from './draw-forms/rectangle-form/rectangle-form.component';
+import { LineFormComponent } from './draw-forms/line-form/line-form.component';
+import { CircleFormComponent } from './draw-forms/circle-form/circle-form.component';
 
 @NgModule({
   providers: [DrawService],
@@ -18,6 +21,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     DrawActionsComponent,
     ButtonActiveDirective,
     UppercasePipe,
+    RectangleFormComponent,
+    LineFormComponent,
+    CircleFormComponent,
   ],
   imports: [
     CommonModule,
