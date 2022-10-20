@@ -1,7 +1,7 @@
 import { Directive, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { DrawService } from '../../services/draw.service';
+import { DrawService } from '../../services/draw/draw.service';
 import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.interface';
 import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
 

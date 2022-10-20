@@ -19,7 +19,7 @@ export class ColorConstants {
   static readonly WHITE: IColor = { name: 'blanc', hexValue: 'white' };
   static readonly YELLOW: IColor = { name: 'jaune', hexValue: 'yellow' };
 
-  static readonly DEFAULT_COLOR: IColor = this.BLACK;
+  static readonly DEFAULT: IColor = this.BLACK;
 
   static readonly COLORS: IColor[] = [
     this.AQUA,
@@ -43,5 +43,5 @@ export class ColorConstants {
 
   static findByHexValue: Function = (hexValue: string): IColor =>
     this.COLORS.find((color) => color.hexValue === hexValue) ??
-    ColorConstants.DEFAULT_COLOR;
+    ColorConstants.DEFAULT;
 }

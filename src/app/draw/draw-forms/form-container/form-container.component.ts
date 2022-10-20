@@ -5,6 +5,7 @@ import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
 import { IColor } from '../../draw-actions/interfaces/color.interface';
 import { ColorConstants } from '../../draw-actions/constants/color.constants';
 import { Subject } from 'rxjs';
+import { MappingService } from '../../services/mapping/mapping.service';
 
 @Component({
   selector: 'app-form-container',
@@ -24,7 +25,9 @@ export class FormContainerComponent implements OnInit {
 
   ngOnInit(): void {
     this.containerFormGroup = new FormGroup({
-      color: new FormControl(ColorConstants.DEFAULT_COLOR),
+      color: new FormControl(
+        MappingService.mapShapeEnumToDefaultColor(this.data.shape)
+      ),
     });
   }
 

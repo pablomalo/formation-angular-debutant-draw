@@ -5,27 +5,27 @@ import { ShapeEnum } from '../enums/shape.enum';
 export class ShapeDefaultsConstants {
   static readonly RECTANGLE: IShapeCommand = {
     shape: ShapeEnum.Rectangle,
-    fill: ColorConstants.DEFAULT_COLOR.hexValue,
+    fill: ColorConstants.BLUE.hexValue,
     width: 200,
     height: 100,
     opacity: 1,
-    left: 10,
+    left: 50,
     top: 35,
   };
 
   static readonly CIRCLE: IShapeCommand = {
     shape: ShapeEnum.Circle,
-    fill: ColorConstants.DEFAULT_COLOR.hexValue,
+    fill: ColorConstants.RED.hexValue,
     opacity: 1,
-    left: 50,
-    top: 75,
+    left: 175,
+    top: 150,
     radius: 30,
   };
 
   static readonly LINE: IShapeCommand = {
     shape: ShapeEnum.Line,
-    stroke: ColorConstants.DEFAULT_COLOR.hexValue,
-    points: [0, 0, 300, 100],
+    stroke: ColorConstants.GREEN.hexValue,
+    points: [275, 100, 400, 150],
     strokeWidth: 3,
   };
 }

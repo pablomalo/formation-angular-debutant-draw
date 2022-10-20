@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DrawService } from '../services/draw.service';
+import { DrawService } from '../services/draw/draw.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ShapeEnum } from './enums/shape.enum';
 import { IColor } from './interfaces/color.interface';

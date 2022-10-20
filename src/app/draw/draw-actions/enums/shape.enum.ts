@@ -1,5 +1,5 @@
 export enum ShapeEnum {
-  'Rectangle' = 'RECT',
+  'Rectangle' = 'RECTANGLE',
   'Circle' = 'CIRCLE',
   'Line' = 'LINE',
 }
