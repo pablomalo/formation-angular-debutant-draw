@@ -74,14 +74,4 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
         break;
     }
   };
-
-  onAddCircle: Function = (): void =>
-    this.drawServices.addShape({
-      shape: ShapeEnum.Circle,
-    });
-
-  onOpenDialogLine: Function = (): void =>
-    this.drawServices.addShape({
-      shape: ShapeEnum.Line,
-    });
 }
