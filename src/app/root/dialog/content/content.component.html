@@ -1,0 +1,16 @@
+<form (ngSubmit)="show()" [formGroup]="myFormGroup">
+
+  <mat-form-field appearance="fill">
+    <input formControlName="myInput1" matInput/>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>My Input 2</mat-label>
+    <input formControlName="myInput2" matInput/>
+  </mat-form-field>
+
+  <button [disabled]="!myFormGroup.valid" type="submit">Valider</button>
+
+</form>
+
+<button (click)="show()">show</button>
