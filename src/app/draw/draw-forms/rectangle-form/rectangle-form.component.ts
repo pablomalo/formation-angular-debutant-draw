@@ -11,28 +11,32 @@ import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.inter
   styleUrls: ['./rectangle-form.component.scss'],
 })
 export class RectangleFormComponent extends AbstractFormDirective {
+  protected readonly shapeEnum: ShapeEnum = ShapeEnum.Rectangle;
+  protected readonly shapeDefaults: IShapeCommand =
+    ShapeDefaultsConstants.RECTANGLE;
+
   protected addControls(): void {
     this.parentFormGroup.addControl(
       'left',
-      new FormControl(ShapeDefaultsConstants.RECTANGLE.left)
+      new FormControl(this.shapeDefaults.left)
     );
     this.parentFormGroup.addControl(
       'top',
-      new FormControl(ShapeDefaultsConstants.RECTANGLE.top)
+      new FormControl(this.shapeDefaults.top)
     );
     this.parentFormGroup.addControl(
       'width',
-      new FormControl(ShapeDefaultsConstants.RECTANGLE.width)
+      new FormControl(this.shapeDefaults.width)
     );
     this.parentFormGroup.addControl(
       'height',
-      new FormControl(ShapeDefaultsConstants.RECTANGLE.height)
+      new FormControl(this.shapeDefaults.height)
     );
   }
 
   protected buildShape(): IShapeCommand {
     return {
-      shape: ShapeEnum.Rectangle,
+      shape: this.shapeEnum,
       left: this.parentFormGroup.get('left')?.value,
       top: this.parentFormGroup.get('top')?.value,
       fill: this.parentFormGroup.get('color')?.value.hexValue,

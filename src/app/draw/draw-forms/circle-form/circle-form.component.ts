@@ -11,24 +11,28 @@ import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.inter
   styleUrls: ['./circle-form.component.scss'],
 })
 export class CircleFormComponent extends AbstractFormDirective {
+  protected readonly shapeEnum: ShapeEnum = ShapeEnum.Circle;
+  protected readonly shapeDefaults: IShapeCommand =
+    ShapeDefaultsConstants.CIRCLE;
+
   protected addControls(): void {
     this.parentFormGroup.addControl(
       'left',
-      new FormControl(ShapeDefaultsConstants.CIRCLE.left)
+      new FormControl(this.shapeDefaults.left)
     );
     this.parentFormGroup.addControl(
       'top',
-      new FormControl(ShapeDefaultsConstants.CIRCLE.top)
+      new FormControl(this.shapeDefaults.top)
     );
     this.parentFormGroup.addControl(
       'radius',
-      new FormControl(ShapeDefaultsConstants.CIRCLE.radius)
+      new FormControl(this.shapeDefaults.radius)
     );
   }
 
   protected buildShape(): IShapeCommand {
     return {
-      shape: ShapeEnum.Circle,
+      shape: this.shapeEnum,
       left: this.parentFormGroup.get('left')?.value,
       top: this.parentFormGroup.get('top')?.value,
       fill: this.parentFormGroup.get('color')?.value.hexValue,

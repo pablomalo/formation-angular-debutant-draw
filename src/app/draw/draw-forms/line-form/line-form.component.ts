@@ -11,48 +11,43 @@ import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.inter
   styleUrls: ['./line-form.component.scss'],
 })
 export class LineFormComponent extends AbstractFormDirective {
+  protected readonly shapeEnum: ShapeEnum = ShapeEnum.Line;
+  protected readonly shapeDefaults: IShapeCommand = ShapeDefaultsConstants.LINE;
+
   protected addControls(): void {
     this.parentFormGroup.addControl(
       'coordAX',
       new FormControl(
-        ShapeDefaultsConstants.LINE.points
-          ? ShapeDefaultsConstants.LINE.points[0]
-          : 0
+        this.shapeDefaults.points ? this.shapeDefaults.points[0] : 0
       )
     );
     this.parentFormGroup.addControl(
       'coordAY',
       new FormControl(
-        ShapeDefaultsConstants.LINE.points
-          ? ShapeDefaultsConstants.LINE.points[1]
-          : 0
+        this.shapeDefaults.points ? this.shapeDefaults.points[1] : 0
       )
     );
     this.parentFormGroup.addControl(
       'coordBX',
       new FormControl(
-        ShapeDefaultsConstants.LINE.points
-          ? ShapeDefaultsConstants.LINE.points[2]
-          : 0
+        this.shapeDefaults.points ? this.shapeDefaults.points[2] : 0
       )
     );
     this.parentFormGroup.addControl(
       'coordBY',
       new FormControl(
-        ShapeDefaultsConstants.LINE.points
-          ? ShapeDefaultsConstants.LINE.points[3]
-          : 0
+        this.shapeDefaults.points ? this.shapeDefaults.points[3] : 0
       )
     );
     this.parentFormGroup.addControl(
       'strokeWidth',
-      new FormControl(ShapeDefaultsConstants.LINE.strokeWidth)
+      new FormControl(this.shapeDefaults.strokeWidth)
     );
   }
 
   protected buildShape(): IShapeCommand {
     return {
-      shape: ShapeEnum.Line,
+      shape: this.shapeEnum,
       stroke: this.parentFormGroup.get('color')?.value.hexValue,
       points: [
         this.parentFormGroup.get('coordAX')?.value,
