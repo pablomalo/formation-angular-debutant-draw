@@ -10,3 +10,12 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+form.create-shape-dialog {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    margin: 1em 1em 0 1em;
+  }
+}
