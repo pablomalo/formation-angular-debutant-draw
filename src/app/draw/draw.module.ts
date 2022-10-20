@@ -5,6 +5,11 @@ import { DrawActionsComponent } from './draw-actions/draw-actions.component';
 import { DrawService } from './services/draw.service';
 import { ButtonActiveDirective } from './draw-actions/directives/button-active.directive';
 import { UppercasePipe } from './draw-actions/pipes/uppercase.pipe';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   providers: [DrawService],
@@ -14,7 +19,15 @@ import { UppercasePipe } from './draw-actions/pipes/uppercase.pipe';
     ButtonActiveDirective,
     UppercasePipe,
   ],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatInputModule,
+    MatDialogModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   exports: [DrawSpaceComponent, DrawActionsComponent],
 })
 export class DrawModule {}

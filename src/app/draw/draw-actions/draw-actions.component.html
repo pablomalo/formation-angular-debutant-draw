@@ -1,10 +1,25 @@
-<button (click)="onTogglePen()" [appBtnActive]="isPenStateActive">{{ 'Stylo' | uppercase }}</button>
-<button (click)="onAddRectangle()" [disabled]="isPenStateActive">{{ '+ Rectangle' }}</button>
-<button (click)="onAddCircle()" [disabled]="isPenStateActive">{{ '+ Cercle' }}</button>
-<button (click)="onAddLine()" [disabled]="isPenStateActive">{{ '+ Ligne' }}</button>
-
-<select #colorSelect (change)="onColorSelect($event)" id="color-select">
-  <option *ngFor="let colorOption of colorOptions"
-          [selected]="colorOption.hexValue === drawServices.activeColor$.value.hexValue"
-          [value]="colorOption.hexValue">{{ colorOption.name | titlecase }}</option>
-</select>
+<div>
+  <button (click)="onTogglePen()" [appBtnActive]="isPenStateActive" color="primary"
+          mat-raised-button>{{ 'Stylo' | uppercase }}</button>
+</div>
+<div>
+  <button (click)="onAddRectangle()" [disabled]="isPenStateActive" color="primary"
+          mat-raised-button>{{ '+ Rectangle' }}</button>
+</div>
+<div>
+  <button (click)="onAddCircle()" [disabled]="isPenStateActive" color="primary"
+          mat-raised-button>{{ '+ Cercle' }}</button>
+</div>
+<div>
+  <button (click)="onAddLine()" [disabled]="isPenStateActive" color="primary"
+          mat-raised-button>{{ '+ Ligne' }}</button>
+</div>
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label>Select</mat-label>
+    <mat-select #colorSelect [(ngModel)]="activeColor" id="color-select-2">
+      <mat-option *ngFor="let colorOption of colorOptions"
+                  [value]="colorOption">{{ colorOption.name | titlecase }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
