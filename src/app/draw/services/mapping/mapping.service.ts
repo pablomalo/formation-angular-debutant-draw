@@ -21,4 +21,19 @@ export class MappingService {
         return ColorConstants.DEFAULT;
     }
   };
+
+  public static mapShapeEnumToDialogTitle: Function = (
+    shape: ShapeEnum
+  ): string => {
+    switch (shape) {
+      case ShapeEnum.Rectangle:
+        return 'Nouveau rectangle';
+      case ShapeEnum.Circle:
+        return 'Nouveau cercle';
+      case ShapeEnum.Line:
+        return 'Nouvelle ligne';
+      default:
+        return '';
+    }
+  };
 }

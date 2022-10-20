@@ -1,8 +1,12 @@
+h1.mat-title {
+  text-align: center;
+}
+
 form {
   display: flex;
   flex-direction: column;
 
-  > * {
-    margin: 1em 1em 0 1em;
+  > button {
+    margin-top: 1em;
   }
 }

@@ -1,3 +1,4 @@
+<h1 class="mat-title accent">{{ dialogTitle }}</h1>
 <form (ngSubmit)="onSubmit()" [formGroup]="containerFormGroup">
   <mat-form-field appearance="fill">
     <mat-label>Couleur</mat-label>
@@ -7,12 +8,14 @@
     </mat-select>
   </mat-form-field>
 
-  <app-circle-form *ngIf="data.shape === ShapeEnum.Circle" [parentFormGroup]="containerFormGroup"
-                   [submitEvent$]="submitSubject$.asObservable()"></app-circle-form>
-  <app-rectangle-form *ngIf="data.shape === ShapeEnum.Rectangle" [parentFormGroup]="containerFormGroup"
-                      [submitEvent$]="submitSubject$.asObservable()"></app-rectangle-form>
-  <app-line-form *ngIf="data.shape === ShapeEnum.Line" [parentFormGroup]="containerFormGroup"
-                 [submitEvent$]="submitSubject$.asObservable()"></app-line-form>
+  <div [ngSwitch]="data.shape">
+    <app-circle-form *ngSwitchCase="ShapeEnum.Circle" [parentFormGroup]="containerFormGroup"
+                     [submitEvent$]="submitSubject$.asObservable()"></app-circle-form>
+    <app-rectangle-form *ngSwitchCase="ShapeEnum.Rectangle" [parentFormGroup]="containerFormGroup"
+                        [submitEvent$]="submitSubject$.asObservable()"></app-rectangle-form>
+    <app-line-form *ngSwitchCase="ShapeEnum.Line" [parentFormGroup]="containerFormGroup"
+                   [submitEvent$]="submitSubject$.asObservable()"></app-line-form>
+  </div>
 
   <button [disabled]="!containerFormGroup.valid" color="primary" mat-raised-button
           type="submit">Ajouter
