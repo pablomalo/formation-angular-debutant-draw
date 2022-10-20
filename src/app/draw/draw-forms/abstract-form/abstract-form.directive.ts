@@ -24,7 +24,7 @@ export abstract class AbstractFormDirective implements OnInit {
   }
 
   onSubmit(): void {
-    this.drawService.addShape(this.buildShape());
+    this.drawService.addShape({ ...this.buildShape(), shape: this.shapeEnum });
   }
 
   protected abstract addControls(): void;

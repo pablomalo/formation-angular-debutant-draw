@@ -47,7 +47,6 @@ export class LineFormComponent extends AbstractFormDirective {
 
   protected buildShape(): IShapeCommand {
     return {
-      shape: this.shapeEnum,
       stroke: this.parentFormGroup.get('color')?.value.hexValue,
       points: [
         this.parentFormGroup.get('coordAX')?.value,

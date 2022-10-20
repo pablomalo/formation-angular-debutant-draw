@@ -32,7 +32,6 @@ export class CircleFormComponent extends AbstractFormDirective {
 
   protected buildShape(): IShapeCommand {
     return {
-      shape: this.shapeEnum,
       left: this.parentFormGroup.get('left')?.value,
       top: this.parentFormGroup.get('top')?.value,
       fill: this.parentFormGroup.get('color')?.value.hexValue,

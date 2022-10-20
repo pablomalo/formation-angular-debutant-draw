@@ -6,7 +6,7 @@ export class ShapeDefaultsConstants {
   static readonly RECTANGLE: IShapeCommand = {
     shape: ShapeEnum.Rectangle,
     fill: ColorConstants.DEFAULT_COLOR.hexValue,
-    width: 100,
+    width: 200,
     height: 100,
     opacity: 1,
     left: 10,
