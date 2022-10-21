@@ -42,15 +42,11 @@ export abstract class AbstractFormComponent implements OnInit {
   }
 
   public coordinateXValidator(): ValidatorFn {
-    return this.getMinMaxError(0, this.maxXCoordinate);
+    return this.getMinMaxError(0, this.maxXCoordinate, 'coordinateXError');
   }
 
   public coordinateYValidator(): ValidatorFn {
-    return this.getMinMaxError(0, this.maxYCoordinate);
-  }
-
-  public formGroupErrorsToJson(): string {
-    return JSON.stringify(this.parentFormGroup.errors);
+    return this.getMinMaxError(0, this.maxYCoordinate, 'coordinateYError');
   }
 
   protected abstract addControls(): void;
@@ -58,14 +54,14 @@ export abstract class AbstractFormComponent implements OnInit {
   protected abstract buildShape(): IShapeCommand;
 
   private getMinMaxError: Function =
-    (minValue: number, maxValue: number): ValidatorFn =>
+    (minValue: number, maxValue: number, errorKey: string): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null => {
       if ('number' !== typeof control.value) {
         return null;
       }
       if (control.value < minValue || control.value > maxValue) {
         return {
-          invalid: `Minimum ${minValue}, maximum ${maxValue}`,
+          [errorKey]: `minMaxError`, // The message itself is irrelevant, only the key is likely to be referenced.
         };
       }
       return null;
