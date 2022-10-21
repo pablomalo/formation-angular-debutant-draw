@@ -1,4 +1,4 @@
-import { IColor } from '../draw-actions/interfaces/color.interface';
+import { IColor } from '../../interfaces/color.interface';
 
 export const AQUA: IColor = { name: 'azur', hexValue: 'aqua' };
 export const BLACK: IColor = { name: 'noir', hexValue: 'black' };

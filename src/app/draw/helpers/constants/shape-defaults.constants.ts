@@ -1,6 +1,6 @@
-import { IShapeCommand } from '../draw-actions/interfaces/shape-command.interface';
-import { ShapeEnum } from '../draw-actions/enums/shape.enum';
+import { ShapeEnum } from '../../enums/shape.enum';
 import { BLUE, GREEN, RED } from './color.constants';
+import { IShapeCommand } from '../../interfaces/shape-command.interface';
 
 export const RECTANGLE: IShapeCommand = {
   shape: ShapeEnum.Rectangle,

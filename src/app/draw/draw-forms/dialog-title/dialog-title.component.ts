@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
+import { ShapeEnum } from '../../enums/shape.enum';
 import { MappingService } from '../../services/mapping/mapping.service';
 
 @Component({

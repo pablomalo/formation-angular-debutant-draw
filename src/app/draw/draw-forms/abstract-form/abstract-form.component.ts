@@ -6,14 +6,14 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { DrawService } from '../../services/draw/draw.service';
-import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.interface';
-import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
 import {
   CANVAS_HEIGHT,
   CANVAS_WIDTH,
   MIN_CANVAS_OVERLAP,
-} from '../../helpers/size.constants';
+} from '../../helpers/constants/size.constants';
+import { ShapeEnum } from '../../enums/shape.enum';
+import { IShapeCommand } from '../../interfaces/shape-command.interface';
+import { DrawService } from '../../services/draw/draw.service';
 
 @Component({
   template: '',

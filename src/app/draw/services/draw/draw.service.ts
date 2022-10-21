@@ -1,18 +1,24 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { fabric } from 'fabric';
-import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
-import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.interface';
-import { IColor } from '../../draw-actions/interfaces/color.interface';
+import { ShapeEnum } from '../../enums/shape.enum';
+import { IShapeCommand } from '../../interfaces/shape-command.interface';
+import { IColor } from '../../interfaces/color.interface';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { DEFAULT, findColorByHexValue } from '../../helpers/color.constants';
+import {
+  DEFAULT,
+  findColorByHexValue,
+} from '../../helpers/constants/color.constants';
 import {
   CIRCLE,
   LINE,
   RECTANGLE,
-} from '../../helpers/shape-defaults.constants';
-import { CANVAS_HEIGHT, CANVAS_WIDTH } from '../../helpers/size.constants';
+} from '../../helpers/constants/shape-defaults.constants';
+import {
+  CANVAS_HEIGHT,
+  CANVAS_WIDTH,
+} from '../../helpers/constants/size.constants';
 
 @Injectable({
   providedIn: 'root',

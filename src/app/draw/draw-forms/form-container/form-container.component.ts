@@ -1,11 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
-import { IColor } from '../../draw-actions/interfaces/color.interface';
+import { ShapeEnum } from '../../enums/shape.enum';
+import { IColor } from '../../interfaces/color.interface';
 import { Subject } from 'rxjs';
 import { MappingService } from '../../services/mapping/mapping.service';
-import { COLORS } from '../../helpers/color.constants';
+import { COLORS } from '../../helpers/constants/color.constants';
 
 @Component({
   selector: 'app-form-container',

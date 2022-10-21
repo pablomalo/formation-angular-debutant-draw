@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DrawService } from '../services/draw/draw.service';
 import { Subject, takeUntil } from 'rxjs';
-import { ShapeEnum } from './enums/shape.enum';
-import { IColor } from './interfaces/color.interface';
+import { ShapeEnum } from '../enums/shape.enum';
+import { IColor } from '../interfaces/color.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { FormContainerComponent } from '../draw-forms/form-container/form-container.component';
-import { COLORS } from '../helpers/color.constants';
+import { COLORS } from '../helpers/constants/color.constants';
 
 @Component({
   selector: 'app-draw-actions',

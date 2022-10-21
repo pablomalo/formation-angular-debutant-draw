@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
-import { IColor } from '../../draw-actions/interfaces/color.interface';
-import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
-import { BLUE, DEFAULT, GREEN, RED } from '../../helpers/color.constants';
+import { IColor } from '../../interfaces/color.interface';
+import { ShapeEnum } from '../../enums/shape.enum';
+import {
+  BLUE,
+  DEFAULT,
+  GREEN,
+  RED,
+} from '../../helpers/constants/color.constants';
 
 @Injectable({
   providedIn: 'root',

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
+import { ShapeEnum } from '../../enums/shape.enum';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
-import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.interface';
-import { RECTANGLE } from '../../helpers/shape-defaults.constants';
+import { IShapeCommand } from '../../interfaces/shape-command.interface';
+import { RECTANGLE } from '../../helpers/constants/shape-defaults.constants';
 
 @Component({
   selector: 'app-rectangle-form',
