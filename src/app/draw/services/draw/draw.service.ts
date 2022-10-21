@@ -1,5 +1,5 @@
-import { Injectable, OnDestroy } from '@angular/core';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
 import { fabric } from 'fabric';
 import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
 import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.interface';
@@ -7,16 +7,20 @@ import { ShapeDefaultsConstants } from '../../draw-actions/constants/shape-defau
 import { ColorConstants } from '../../draw-actions/constants/color.constants';
 import { IColor } from '../../draw-actions/interfaces/color.interface';
 import { SizeConstants } from '../../draw-actions/constants/size.constants';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class DrawService implements OnDestroy {
+export class DrawService implements OnDestroy, OnInit {
   private _canvasFabric!: fabric.Canvas;
 
   private readonly _penState$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
   private _unsubscribe$: Subject<void> = new Subject<void>();
+
+  constructor(private readonly http: HttpClient) {}
 
   private _activeColor$: BehaviorSubject<IColor> = new BehaviorSubject<IColor>(
     ColorConstants.DEFAULT
@@ -29,6 +33,8 @@ export class DrawService implements OnDestroy {
   public get penState$(): BehaviorSubject<boolean> {
     return this._penState$;
   }
+
+  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this._unsubscribe$.next(undefined);
@@ -49,6 +55,9 @@ export class DrawService implements OnDestroy {
       .pipe(takeUntil(this._unsubscribe$))
       .subscribe((color: IColor) => (freeDrawingBrush.color = color.hexValue));
   };
+
+  list: Function = (): Observable<Object> =>
+    this.http.get(`${environment.apiUrl}/shapes`);
 
   togglePen: Function = (): void => {
     this._penState$.next(!this._penState$.value);

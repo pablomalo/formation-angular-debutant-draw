@@ -16,6 +16,7 @@ import { CircleFormComponent } from './draw-forms/circle-form/circle-form.compon
 import { FormContainerComponent } from './draw-forms/form-container/form-container.component';
 import { MatIconModule } from '@angular/material/icon';
 import { DialogTitleComponent } from './draw-forms/dialog-title/dialog-title.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   providers: [DrawService],
@@ -39,6 +40,7 @@ import { DialogTitleComponent } from './draw-forms/dialog-title/dialog-title.com
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
+    HttpClientModule,
   ],
   exports: [DrawSpaceComponent, DrawActionsComponent],
 })
