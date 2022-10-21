@@ -1,12 +1,17 @@
-h1.mat-title {
-  text-align: center;
-}
-
 form {
   display: flex;
   flex-direction: column;
 
   > button {
     margin-top: 1em;
+
+    &.submit-btn {
+      height: 4em;
+    }
+
+    .submit-icon {
+      transform: scale(1.4);
+      margin-right: 8px;
+    }
   }
 }

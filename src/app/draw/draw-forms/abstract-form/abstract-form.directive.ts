@@ -15,6 +15,10 @@ import { SizeConstants } from '../../draw-actions/constants/size.constants';
 export abstract class AbstractFormDirective implements OnInit {
   @Input() parentFormGroup!: FormGroup;
   @Input() submitEvent$!: Observable<void>;
+  maxXCoordinate: number =
+    SizeConstants.CANVAS_WIDTH - SizeConstants.MIN_CANVAS_OVERLAP;
+  maxYCoordinate: number =
+    SizeConstants.CANVAS_HEIGHT - SizeConstants.MIN_CANVAS_OVERLAP;
   protected abstract readonly shapeEnum: ShapeEnum;
   protected abstract readonly shapeDefaults: IShapeCommand;
   private _unsubscribe$: Subject<void> = new Subject<void>();
@@ -33,12 +37,16 @@ export abstract class AbstractFormDirective implements OnInit {
     this.drawService.addShape({ ...this.buildShape(), shape: this.shapeEnum });
   }
 
-  protected coordinateXValidator(): ValidatorFn {
-    return this.getMinMaxError(0, SizeConstants.CANVAS_WIDTH);
+  public coordinateXValidator(): ValidatorFn {
+    return this.getMinMaxError(0, this.maxXCoordinate);
   }
 
-  protected coordinateYValidator(): ValidatorFn {
-    return this.getMinMaxError(0, SizeConstants.CANVAS_HEIGHT);
+  public coordinateYValidator(): ValidatorFn {
+    return this.getMinMaxError(0, this.maxYCoordinate);
+  }
+
+  public formGroupErrorsToJson(): string {
+    return JSON.stringify(this.parentFormGroup.errors);
   }
 
   protected abstract addControls(): void;
@@ -48,9 +56,12 @@ export abstract class AbstractFormDirective implements OnInit {
   private getMinMaxError: Function =
     (minValue: number, maxValue: number): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null => {
+      if ('number' !== typeof control.value) {
+        return null;
+      }
       if (control.value < minValue || control.value > maxValue) {
         return {
-          error: `Minimum ${minValue}, maximum ${maxValue}`,
+          invalid: `Minimum ${minValue}, maximum ${maxValue}`,
         };
       }
       return null;

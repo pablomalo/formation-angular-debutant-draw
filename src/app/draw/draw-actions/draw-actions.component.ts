@@ -60,6 +60,7 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
   onOpenDialog: Function = (shape: ShapeEnum): void => {
     this.dialog.open(FormContainerComponent, {
       data: { shape: shape },
+      width: '600px',
     });
   };
 }

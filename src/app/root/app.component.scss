@@ -1,12 +1,16 @@
 section {
   display: flex;
   height: 600px;
+
   div {
     &.left {
-      flex: 20%;
+      flex-grow: 1;
     }
+
     &.right {
-      flex: 80%;
+      flex-shrink: 1;
+      width: fit-content;
+      padding-right: 1em;
     }
   }
 }

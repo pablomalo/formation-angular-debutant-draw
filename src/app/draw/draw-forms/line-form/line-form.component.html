@@ -1,22 +1,42 @@
 <div [formGroup]="parentFormGroup">
   <mat-form-field appearance="fill">
     <mat-label>Départ, coord. X</mat-label>
-    <input formControlName="coordAX" matInput required type="number"/>
+    <input #coordAX formControlName="coordAX" matInput required type="number"/>
+    <mat-error *ngIf="coordinateXValidator">Min: 0, Max: {{ this.maxXCoordinate }}</mat-error>
+    <button (click)="coordAX.value = ''" *ngIf="coordAX.value"
+            aria-label="Clear" mat-icon-button matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Départ, coord. Y</mat-label>
-    <input formControlName="coordAY" matInput required type="number"/>
+    <input #coordAY formControlName="coordAY" matInput required type="number"/>
+    <mat-error *ngIf="coordinateYValidator">Min: 0, Max: {{ this.maxYCoordinate }}</mat-error>
+    <button (click)="coordAY.value = ''" *ngIf="coordAY.value" aria-label="Clear" mat-icon-button matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Arrivée, coord. X</mat-label>
-    <input formControlName="coordBX" matInput required type="number"/>
+    <input #coordBX formControlName="coordBX" matInput required type="number"/>
+    <mat-error *ngIf="coordinateXValidator">Min: 0, Max: {{ this.maxXCoordinate }}</mat-error>
+    <button (click)="coordBX.value =''" *ngIf="coordBX.value" aria-label="Clear" mat-icon-button matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Arrivée, coord. Y</mat-label>
-    <input formControlName="coordBY" matInput required type="number"/>
+    <input #coordBY formControlName="coordBY" matInput required type="number"/>
+    <mat-error *ngIf="coordinateYValidator">Min: 0, Max: {{ this.maxYCoordinate }}</mat-error>
+    <button (click)="coordBY.value =''" *ngIf="coordBY.value" aria-label="Clear" mat-icon-button matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Epaisseur</mat-label>
-    <input formControlName="strokeWidth" matInput required type="number"/>
+    <input #strokeWidth formControlName="strokeWidth" matInput required type="number"/>
+    <button (click)="strokeWidth.value =''" *ngIf="strokeWidth.value" aria-label="Clear" mat-icon-button matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
 </div>

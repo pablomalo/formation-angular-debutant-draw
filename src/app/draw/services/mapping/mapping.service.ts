@@ -36,4 +36,17 @@ export class MappingService {
         return '';
     }
   };
+
+  public static mapShapeEnumToIcon: Function = (shape: ShapeEnum): string => {
+    switch (shape) {
+      case ShapeEnum.Rectangle:
+        return 'crop_3_2';
+      case ShapeEnum.Circle:
+        return 'radio_button_unchecked';
+      case ShapeEnum.Line:
+        return 'show_chart';
+      default:
+        return '';
+    }
+  };
 }

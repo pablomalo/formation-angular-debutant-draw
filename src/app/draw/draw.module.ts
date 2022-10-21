@@ -14,6 +14,8 @@ import { RectangleFormComponent } from './draw-forms/rectangle-form/rectangle-fo
 import { LineFormComponent } from './draw-forms/line-form/line-form.component';
 import { CircleFormComponent } from './draw-forms/circle-form/circle-form.component';
 import { FormContainerComponent } from './draw-forms/form-container/form-container.component';
+import { MatIconModule } from '@angular/material/icon';
+import { DialogTitleComponent } from './draw-forms/dialog-title/dialog-title.component';
 
 @NgModule({
   providers: [DrawService],
@@ -26,6 +28,7 @@ import { FormContainerComponent } from './draw-forms/form-container/form-contain
     LineFormComponent,
     CircleFormComponent,
     FormContainerComponent,
+    DialogTitleComponent,
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ import { FormContainerComponent } from './draw-forms/form-container/form-contain
     MatSelectModule,
     FormsModule,
     ReactiveFormsModule,
+    MatIconModule,
   ],
   exports: [DrawSpaceComponent, DrawActionsComponent],
 })

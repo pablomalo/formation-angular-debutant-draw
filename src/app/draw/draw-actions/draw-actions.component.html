@@ -1,6 +1,9 @@
 <div>
-  <button (click)="onTogglePen()" [appBtnActive]="isPenStateActive" color="primary"
-          mat-raised-button>{{ 'Stylo' | uppercase }}</button>
+  <button (click)="onTogglePen()" [appBtnActive]="isPenStateActive" color="accent"
+          mat-raised-button>
+    <mat-icon>draw</mat-icon>
+    {{ 'Stylo' | uppercase }}
+  </button>
 </div>
 <div>
   <mat-form-field appearance="fill">
@@ -13,13 +16,22 @@
 </div>
 <div>
   <button (click)="onOpenDialog(ShapeEnum.Rectangle)" [disabled]="isPenStateActive" color="primary"
-          mat-raised-button>{{ '+ Rectangle' }}</button>
+          mat-raised-button>
+    <mat-icon>crop_3_2</mat-icon>
+    {{ 'Rectangle' }}
+  </button>
 </div>
 <div>
   <button (click)="onOpenDialog(ShapeEnum.Circle)" [disabled]="isPenStateActive" color="primary"
-          mat-raised-button>{{ '+ Cercle' }}</button>
+          mat-raised-button>
+    <mat-icon>radio_button_unchecked</mat-icon>
+    {{ 'Cercle' }}
+  </button>
 </div>
 <div>
   <button (click)="onOpenDialog(ShapeEnum.Line)" [disabled]="isPenStateActive" color="primary"
-          mat-raised-button>{{ '+ Ligne' }}</button>
+          mat-raised-button>
+    <mat-icon>show_chart</mat-icon>
+    {{ 'Ligne' }}
+  </button>
 </div>

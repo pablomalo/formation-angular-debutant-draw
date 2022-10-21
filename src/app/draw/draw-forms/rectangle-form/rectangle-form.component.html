@@ -1,18 +1,32 @@
 <div [formGroup]="parentFormGroup">
   <mat-form-field appearance="fill">
     <mat-label>Marge gauche</mat-label>
-    <input formControlName="left" matInput required type="number"/>
+    <input #left formControlName="left" matInput required type="number"/>
+    <mat-error *ngIf="coordinateXValidator">Min: 0, Max: {{ this.maxXCoordinate }}</mat-error>
+    <button (click)="left.value =''" *ngIf="left.value" aria-label="Clear" mat-icon-button matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Marge supérieure</mat-label>
-    <input formControlName="top" matInput required type="number"/>
+    <input #top formControlName="top" matInput required type="number"/>
+    <mat-error *ngIf="coordinateYValidator">Min: 0, Max: {{ this.maxYCoordinate }}</mat-error>
+    <button (click)="top.value =''" *ngIf="top.value" aria-label="Clear" mat-icon-button matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Largeur</mat-label>
-    <input formControlName="width" matInput required type="number"/>
+    <input #width formControlName="width" matInput required type="number"/>
+    <button (click)="width.value =''" *ngIf="width.value" aria-label="Clear" mat-icon-button matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Hauteur</mat-label>
-    <input formControlName="height" matInput required type="number"/>
+    <input #height formControlName="height" matInput required type="number"/>
+    <button (click)="height.value =''" *ngIf="height.value" aria-label="Clear" mat-icon-button matSuffix>
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
 </div>

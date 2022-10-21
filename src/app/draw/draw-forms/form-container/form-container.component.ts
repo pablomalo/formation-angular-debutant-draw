@@ -16,7 +16,6 @@ export class FormContainerComponent implements OnInit {
   containerFormGroup!: FormGroup;
   ShapeEnum: typeof ShapeEnum = ShapeEnum;
   colorOptions: IColor[] = ColorConstants.COLORS;
-  dialogTitle!: string;
   submitSubject$: Subject<void> = new Subject<void>();
 
   constructor(
@@ -30,10 +29,6 @@ export class FormContainerComponent implements OnInit {
         MappingService.mapShapeEnumToDefaultColor(this.data.shape)
       ),
     });
-
-    this.dialogTitle = MappingService.mapShapeEnumToDialogTitle(
-      this.data.shape
-    );
   }
 
   onSubmit() {
