@@ -22,8 +22,12 @@
     <mat-icon class="submit-icon">add_to_photos</mat-icon>
     Ajouter
   </button>
-  <button (click)="onCancel()" color="secondary" mat-button
-          type='button'>
+  <!--  <button (click)="onCancel($event)" mat-button-->
+  <!--          type='button'>-->
+  <!--    <mat-icon>close</mat-icon>-->
+  <!--    Annuler-->
+  <!--  </button>-->
+  <button mat-button mat-dialog-close="true">
     <mat-icon>close</mat-icon>
     Annuler
   </button>

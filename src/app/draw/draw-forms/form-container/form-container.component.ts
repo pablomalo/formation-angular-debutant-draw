@@ -36,7 +36,8 @@ export class FormContainerComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  onCancel(): void {
+  onCancel($event: Event): void {
     this.dialogRef.close();
+    $event.preventDefault();
   }
 }
