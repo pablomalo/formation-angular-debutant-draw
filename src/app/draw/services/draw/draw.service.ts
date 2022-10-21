@@ -1,11 +1,9 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { fabric } from 'fabric';
 import { ShapeEnum } from '../../enums/shape.enum';
 import { IShapeCommand } from '../../interfaces/shape-command.interface';
 import { IColor } from '../../interfaces/color.interface';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
 import {
   DEFAULT,
   findColorByHexValue,
@@ -24,13 +22,17 @@ import {
   providedIn: 'root',
 })
 export class DrawService implements OnDestroy, OnInit {
-  private _canvasFabric!: fabric.Canvas;
-
   private readonly _penState$: BehaviorSubject<boolean> =
     new BehaviorSubject<boolean>(false);
   private _unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(private readonly http: HttpClient) {}
+  constructor() {}
+
+  private _canvasFabric!: fabric.Canvas;
+
+  get canvasFabric(): fabric.Canvas {
+    return this._canvasFabric;
+  }
 
   private _activeColor$: BehaviorSubject<IColor> = new BehaviorSubject<IColor>(
     DEFAULT
@@ -51,7 +53,7 @@ export class DrawService implements OnDestroy, OnInit {
     this._unsubscribe$.complete();
   }
 
-  initCanvas: Function = (): void => {
+  initCanvas = (): void => {
     this._canvasFabric = new fabric.Canvas('draw-space', {
       backgroundColor: 'lightgrey',
       selection: false,
@@ -66,10 +68,7 @@ export class DrawService implements OnDestroy, OnInit {
       .subscribe((color: IColor) => (freeDrawingBrush.color = color.hexValue));
   };
 
-  list: Function = (): Observable<Object> =>
-    this.http.get(`${environment.apiUrl}/shapes`);
-
-  togglePen: Function = (): void => {
+  togglePen = (): void => {
     this._penState$.next(!this._penState$.value);
     this._canvasFabric.isDrawingMode = this._penState$.value;
     this._canvasFabric.freeDrawingBrush.color =
@@ -82,7 +81,7 @@ export class DrawService implements OnDestroy, OnInit {
     this._activeColor$.next(nextColor);
   }
 
-  addShape: Function = (shapeCommand: IShapeCommand): void => {
+  addShape = (shapeCommand: IShapeCommand): void => {
     const mergedCommand: IShapeCommand =
       this._mergeCommandDefaults(shapeCommand);
 
@@ -108,7 +107,7 @@ export class DrawService implements OnDestroy, OnInit {
   };
 
   // TODO Remove me
-  private _subscribeToActiveColor: Function = (
+  private _subscribeToActiveColor = (
     shape: fabric.Object,
     colorProperty: string
   ): void => {
@@ -120,7 +119,7 @@ export class DrawService implements OnDestroy, OnInit {
       );
   };
 
-  private _mergeCommandDefaults: Function = (
+  private _mergeCommandDefaults = (
     shapeCommand: IShapeCommand
   ): IShapeCommand => {
     const shapeToDefaultsMap = {

@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DrawService } from '../services/draw/draw.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { ShapeEnum } from '../enums/shape.enum';
 import { IColor } from '../interfaces/color.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { FormContainerComponent } from '../draw-forms/form-container/form-container.component';
 import { COLORS } from '../helpers/constants/color.constants';
+import { PersistenceService } from '../services/persistence/persistence.service';
 
 @Component({
   selector: 'app-draw-actions',
@@ -22,7 +23,8 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
   private _unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
-    private readonly drawServices: DrawService,
+    private readonly drawService: DrawService,
+    private readonly persistenceService: PersistenceService,
     private readonly dialog: MatDialog
   ) {}
 
@@ -33,17 +35,17 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
   }
 
   set activeColor(color: IColor) {
-    this.drawServices.nextActiveColor(color);
+    this.drawService.nextActiveColor(color);
   }
 
   ngOnInit(): void {
-    this.drawServices.penState$
+    this.drawService.penState$
       .pipe(takeUntil(this._unsubscribe$))
       .subscribe((state: boolean): void => {
         this.isPenStateActive = state;
       });
 
-    this.drawServices.activeColor$
+    this.drawService.activeColor$
       .pipe(takeUntil(this._unsubscribe$))
       .subscribe((color: IColor): void => {
         this._activeColor = color;
@@ -55,12 +57,27 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
     this._unsubscribe$.complete();
   }
 
-  onTogglePen: Function = (): void => this.drawServices.togglePen();
+  onTogglePen = (): void => this.drawService.togglePen();
 
-  onOpenDialog: Function = (shape: ShapeEnum): void => {
+  onOpenDialog = (shape: ShapeEnum): void => {
     this.dialog.open(FormContainerComponent, {
       data: { shape: shape },
       width: '600px',
+    });
+  };
+
+  save = (): void => {
+    this.persistenceService.save();
+  };
+
+  load = (): void => {
+    const shapes: Observable<object> = this.persistenceService.list();
+    shapes.subscribe((shapes: any) => {
+      const last: any = shapes[shapes.length - 1];
+      console.log(last.payload);
+      this.drawService.canvasFabric.loadFromJSON(last, () =>
+        this.drawService.canvasFabric.renderAll()
+      );
     });
   };
 }

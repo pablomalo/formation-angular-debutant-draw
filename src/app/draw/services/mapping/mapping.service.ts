@@ -12,9 +12,7 @@ import {
   providedIn: 'root',
 })
 export class MappingService {
-  public static mapShapeEnumToDefaultColor: Function = (
-    shape: ShapeEnum
-  ): IColor => {
+  public static mapShapeEnumToDefaultColor = (shape: ShapeEnum): IColor => {
     switch (shape) {
       case ShapeEnum.Rectangle:
         return BLUE;
@@ -27,9 +25,7 @@ export class MappingService {
     }
   };
 
-  public static mapShapeEnumToDialogTitle: Function = (
-    shape: ShapeEnum
-  ): string => {
+  public static mapShapeEnumToDialogTitle = (shape: ShapeEnum): string => {
     switch (shape) {
       case ShapeEnum.Rectangle:
         return 'Nouveau rectangle';
@@ -42,7 +38,7 @@ export class MappingService {
     }
   };
 
-  public static mapShapeEnumToIcon: Function = (shape: ShapeEnum): string => {
+  public static mapShapeEnumToIcon = (shape: ShapeEnum): string => {
     switch (shape) {
       case ShapeEnum.Rectangle:
         return 'crop_3_2';

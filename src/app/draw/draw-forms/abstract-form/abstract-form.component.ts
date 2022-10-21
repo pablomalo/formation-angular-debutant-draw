@@ -53,7 +53,7 @@ export abstract class AbstractFormComponent implements OnInit {
 
   protected abstract buildShape(): IShapeCommand;
 
-  private getMinMaxError: Function =
+  private getMinMaxError =
     (minValue: number, maxValue: number, errorKey: string): ValidatorFn =>
     (control: AbstractControl): ValidationErrors | null => {
       if ('number' !== typeof control.value) {

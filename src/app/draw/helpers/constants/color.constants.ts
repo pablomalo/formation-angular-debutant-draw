@@ -40,5 +40,5 @@ export const COLORS: IColor[] = [
   YELLOW,
 ].sort((a, b): number => a.name.localeCompare(b.name));
 
-export const findColorByHexValue: Function = (hexValue: string): IColor =>
+export const findColorByHexValue = (hexValue: string): IColor =>
   COLORS.find((color) => color.hexValue === hexValue) ?? DEFAULT;
