@@ -1,4 +1,4 @@
-import { Directive, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormGroup,
@@ -15,8 +15,10 @@ import {
   MIN_CANVAS_OVERLAP,
 } from '../../helpers/size.constants';
 
-@Directive()
-export abstract class AbstractFormDirective implements OnInit {
+@Component({
+  template: '',
+})
+export abstract class AbstractFormComponent implements OnInit {
   @Input() parentFormGroup!: FormGroup;
   @Input() submitEvent$!: Observable<void>;
   maxXCoordinate: number = CANVAS_WIDTH - MIN_CANVAS_OVERLAP;

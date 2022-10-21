@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
-import { AbstractFormDirective } from '../abstract-form/abstract-form.directive';
+import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.interface';
 import { LINE } from '../../helpers/shape-defaults.constants';
 
@@ -10,7 +10,7 @@ import { LINE } from '../../helpers/shape-defaults.constants';
   templateUrl: './line-form.component.html',
   styleUrls: ['./line-form.component.scss'],
 })
-export class LineFormComponent extends AbstractFormDirective {
+export class LineFormComponent extends AbstractFormComponent {
   protected readonly shapeEnum: ShapeEnum = ShapeEnum.Line;
   protected readonly shapeDefaults: IShapeCommand = LINE;
 

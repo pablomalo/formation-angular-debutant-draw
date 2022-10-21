@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
-import { AbstractFormDirective } from '../abstract-form/abstract-form.directive';
+import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.interface';
 import { CIRCLE } from '../../helpers/shape-defaults.constants';
 
@@ -10,7 +10,7 @@ import { CIRCLE } from '../../helpers/shape-defaults.constants';
   templateUrl: './circle-form.component.html',
   styleUrls: ['./circle-form.component.scss'],
 })
-export class CircleFormComponent extends AbstractFormDirective {
+export class CircleFormComponent extends AbstractFormComponent {
   protected readonly shapeEnum: ShapeEnum = ShapeEnum.Circle;
   protected readonly shapeDefaults: IShapeCommand = CIRCLE;
 
