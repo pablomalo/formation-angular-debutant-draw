@@ -3,9 +3,9 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
 import { IColor } from '../../draw-actions/interfaces/color.interface';
-import { ColorConstants } from '../../draw-actions/constants/color.constants';
 import { Subject } from 'rxjs';
 import { MappingService } from '../../services/mapping/mapping.service';
+import { COLORS } from '../../helpers/color.constants';
 
 @Component({
   selector: 'app-form-container',
@@ -15,7 +15,7 @@ import { MappingService } from '../../services/mapping/mapping.service';
 export class FormContainerComponent implements OnInit {
   containerFormGroup!: FormGroup;
   ShapeEnum: typeof ShapeEnum = ShapeEnum;
-  colorOptions: IColor[] = ColorConstants.COLORS;
+  colorOptions: IColor[] = COLORS;
   submitSubject$: Subject<void> = new Subject<void>();
 
   constructor(

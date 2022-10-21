@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ShapeDefaultsConstants } from '../../draw-actions/constants/shape-defaults.constants';
 import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
 import { AbstractFormDirective } from '../abstract-form/abstract-form.directive';
 import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.interface';
+import { RECTANGLE } from '../../helpers/shape-defaults.constants';
 
 @Component({
   selector: 'app-rectangle-form',
@@ -12,8 +12,7 @@ import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.inter
 })
 export class RectangleFormComponent extends AbstractFormDirective {
   protected readonly shapeEnum: ShapeEnum = ShapeEnum.Rectangle;
-  protected readonly shapeDefaults: IShapeCommand =
-    ShapeDefaultsConstants.RECTANGLE;
+  protected readonly shapeDefaults: IShapeCommand = RECTANGLE;
 
   protected addControls(): void {
     this.parentFormGroup.addControl(

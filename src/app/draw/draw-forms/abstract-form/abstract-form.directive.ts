@@ -9,16 +9,18 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { DrawService } from '../../services/draw/draw.service';
 import { IShapeCommand } from '../../draw-actions/interfaces/shape-command.interface';
 import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
-import { SizeConstants } from '../../draw-actions/constants/size.constants';
+import {
+  CANVAS_HEIGHT,
+  CANVAS_WIDTH,
+  MIN_CANVAS_OVERLAP,
+} from '../../helpers/size.constants';
 
 @Directive()
 export abstract class AbstractFormDirective implements OnInit {
   @Input() parentFormGroup!: FormGroup;
   @Input() submitEvent$!: Observable<void>;
-  maxXCoordinate: number =
-    SizeConstants.CANVAS_WIDTH - SizeConstants.MIN_CANVAS_OVERLAP;
-  maxYCoordinate: number =
-    SizeConstants.CANVAS_HEIGHT - SizeConstants.MIN_CANVAS_OVERLAP;
+  maxXCoordinate: number = CANVAS_WIDTH - MIN_CANVAS_OVERLAP;
+  maxYCoordinate: number = CANVAS_HEIGHT - MIN_CANVAS_OVERLAP;
   protected abstract readonly shapeEnum: ShapeEnum;
   protected abstract readonly shapeDefaults: IShapeCommand;
   private _unsubscribe$: Subject<void> = new Subject<void>();

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IColor } from '../../draw-actions/interfaces/color.interface';
-import { ColorConstants } from '../../draw-actions/constants/color.constants';
 import { ShapeEnum } from '../../draw-actions/enums/shape.enum';
+import { BLUE, DEFAULT, GREEN, RED } from '../../helpers/color.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -12,13 +12,13 @@ export class MappingService {
   ): IColor => {
     switch (shape) {
       case ShapeEnum.Rectangle:
-        return ColorConstants.BLUE;
+        return BLUE;
       case ShapeEnum.Circle:
-        return ColorConstants.RED;
+        return RED;
       case ShapeEnum.Line:
-        return ColorConstants.GREEN;
+        return GREEN;
       default:
-        return ColorConstants.DEFAULT;
+        return DEFAULT;
     }
   };
 

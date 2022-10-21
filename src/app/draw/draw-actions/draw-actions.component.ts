@@ -3,9 +3,9 @@ import { DrawService } from '../services/draw/draw.service';
 import { Subject, takeUntil } from 'rxjs';
 import { ShapeEnum } from './enums/shape.enum';
 import { IColor } from './interfaces/color.interface';
-import { ColorConstants } from './constants/color.constants';
 import { MatDialog } from '@angular/material/dialog';
 import { FormContainerComponent } from '../draw-forms/form-container/form-container.component';
+import { COLORS } from '../helpers/color.constants';
 
 @Component({
   selector: 'app-draw-actions',
@@ -15,7 +15,7 @@ import { FormContainerComponent } from '../draw-forms/form-container/form-contai
 export class DrawActionsComponent implements OnInit, OnDestroy {
   isPenStateActive: boolean = false;
 
-  colorOptions: IColor[] = ColorConstants.COLORS;
+  colorOptions: IColor[] = COLORS;
 
   ShapeEnum = ShapeEnum;
 
