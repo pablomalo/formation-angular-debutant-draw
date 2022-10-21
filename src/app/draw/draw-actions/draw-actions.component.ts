@@ -71,10 +71,9 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
   };
 
   load = (): void => {
-    const shapes: Observable<object> = this.persistenceService.list();
-    shapes.subscribe((shapes: any) => {
-      const last: any = shapes[shapes.length - 1];
-      console.log(last.payload);
+    const drawings: Observable<object> = this.persistenceService.list();
+    drawings.subscribe((drawings: any) => {
+      const last: any = drawings[drawings.length - 1];
       this.drawService.canvasFabric.loadFromJSON(last, () =>
         this.drawService.canvasFabric.renderAll()
       );

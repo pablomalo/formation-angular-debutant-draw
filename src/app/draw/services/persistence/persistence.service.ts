@@ -8,7 +8,7 @@ import { DrawService } from '../draw/draw.service';
   providedIn: 'root',
 })
 export class PersistenceService {
-  private _cachedShape: any = {};
+  private _cachedDrawing: any = {};
 
   constructor(
     private readonly drawService: DrawService,
@@ -16,29 +16,29 @@ export class PersistenceService {
   ) {}
 
   list = (): Observable<object> =>
-    this.http.get(`${environment.apiUrl}/shapes`);
+    this.http.get(`${environment.apiUrl}/drawings`);
 
   save = (): void => {
-    const shape: object = this.drawService.canvasFabric.toObject();
-    console.log(shape);
-    if (this._isChanged(shape)) {
-      this._cachedShape = this._stripId(shape);
-      this.http.post(`${environment.apiUrl}/shapes`, shape).subscribe();
+    const drawing: object = this.drawService.canvasFabric.toObject();
+    if (this._isChanged(drawing)) {
+      this._cachedDrawing = this._stripId(drawing);
+      this.http.post(`${environment.apiUrl}/drawings`, drawing).subscribe();
     }
   };
 
-  _isChanged = (shape: object): boolean => {
+  _isChanged = (drawing: object): boolean => {
     return (
-      JSON.stringify(this._cachedShape) !== JSON.stringify(this._stripId(shape))
+      JSON.stringify(this._cachedDrawing) !==
+      JSON.stringify(this._stripId(drawing))
     );
   };
 
-  _stripId = (shape: object): any => {
-    const strippedShape = {
+  _stripId = (drawing: object): any => {
+    const strippedDrawing = {
       id: undefined,
-      ...shape,
+      ...drawing,
     };
-    delete strippedShape.id;
-    return strippedShape;
+    delete strippedDrawing.id;
+    return strippedDrawing;
   };
 }
