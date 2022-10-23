@@ -8,6 +8,10 @@ import { FormContainerComponent } from '../draw-forms/form-container/form-contai
 import { COLORS } from '../helpers/constants/color.constants';
 import { PersistenceService } from '../services/persistence/persistence.service';
 
+export type SavingStatus = {
+  processing: boolean;
+};
+
 @Component({
   selector: 'app-draw-actions',
   templateUrl: './draw-actions.component.html',
@@ -15,6 +19,8 @@ import { PersistenceService } from '../services/persistence/persistence.service'
 })
 export class DrawActionsComponent implements OnInit, OnDestroy {
   isPenStateActive: boolean = false;
+  savingStatus: SavingStatus = { processing: false };
+  isLoading: boolean = false;
 
   colorOptions: IColor[] = COLORS;
 
@@ -67,16 +73,22 @@ export class DrawActionsComponent implements OnInit, OnDestroy {
   };
 
   save = (): void => {
-    this.persistenceService.save();
+    this.persistenceService.save(this.savingStatus);
   };
 
   load = (): void => {
+    this.isLoading = true;
     const drawings: Observable<object> = this.persistenceService.list();
     drawings.subscribe((drawings: any) => {
-      const last: any = drawings[drawings.length - 1];
+      const last: object = drawings[drawings.length - 1];
       this.drawService.canvasFabric.loadFromJSON(last, () =>
         this.drawService.canvasFabric.renderAll()
       );
+      this.isLoading = false;
     });
+  };
+
+  reset = (): void => {
+    this.drawService.resetCanvas();
   };
 }

@@ -17,6 +17,7 @@ import { FormContainerComponent } from './draw-forms/form-container/form-contain
 import { MatIconModule } from '@angular/material/icon';
 import { DialogTitleComponent } from './draw-forms/dialog-title/dialog-title.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgxLoadingButtonsModule } from 'ngx-loading-buttons';
 
 @NgModule({
   providers: [DrawService],
@@ -41,6 +42,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     MatIconModule,
     HttpClientModule,
+    NgxLoadingButtonsModule,
   ],
   exports: [DrawSpaceComponent, DrawActionsComponent],
 })

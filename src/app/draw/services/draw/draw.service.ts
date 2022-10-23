@@ -5,6 +5,7 @@ import { ShapeEnum } from '../../enums/shape.enum';
 import { IShapeCommand } from '../../interfaces/shape-command.interface';
 import { IColor } from '../../interfaces/color.interface';
 import {
+  BLACK,
   DEFAULT,
   findColorByHexValue,
 } from '../../helpers/constants/color.constants';
@@ -17,6 +18,16 @@ import {
   CANVAS_HEIGHT,
   CANVAS_WIDTH,
 } from '../../helpers/constants/size.constants';
+
+export type CanvasDefaults = { [key: string]: any };
+
+export const canvasDefaultOptions: CanvasDefaults = {
+  backgroundColor: 'lightgrey',
+  selection: false,
+  preserveObjectStacking: true,
+  width: CANVAS_WIDTH,
+  height: CANVAS_HEIGHT,
+};
 
 @Injectable({
   providedIn: 'root',
@@ -54,18 +65,14 @@ export class DrawService implements OnDestroy, OnInit {
   }
 
   initCanvas = (): void => {
-    this._canvasFabric = new fabric.Canvas('draw-space', {
-      backgroundColor: 'lightgrey',
-      selection: false,
-      preserveObjectStacking: true,
-      width: CANVAS_WIDTH,
-      height: CANVAS_HEIGHT,
-    });
-    const freeDrawingBrush = this._canvasFabric.freeDrawingBrush;
-    freeDrawingBrush.width = 3;
-    this._activeColor$
-      .pipe(takeUntil(this._unsubscribe$))
-      .subscribe((color: IColor) => (freeDrawingBrush.color = color.hexValue));
+    this._canvasFabric = new fabric.Canvas('draw-space', canvasDefaultOptions);
+    this._initBrush();
+  };
+
+  resetCanvas = (): void => {
+    this.canvasFabric.initialize('draw-space', canvasDefaultOptions);
+    this._activeColor$.next(BLACK);
+    this._initBrush();
   };
 
   togglePen = (): void => {
@@ -131,5 +138,15 @@ export class DrawService implements OnDestroy, OnInit {
       ...shapeToDefaultsMap[shapeCommand.shape],
       ...shapeCommand,
     } as IShapeCommand;
+  };
+
+  private _initBrush = (): void => {
+    this._canvasFabric.freeDrawingBrush.width = 3;
+    this._activeColor$
+      .pipe(takeUntil(this._unsubscribe$))
+      .subscribe(
+        (color: IColor) =>
+          (this._canvasFabric.freeDrawingBrush.color = color.hexValue)
+      );
   };
 }

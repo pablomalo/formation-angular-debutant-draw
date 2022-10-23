@@ -18,34 +18,41 @@
   <button (click)="onOpenDialog(ShapeEnum.Rectangle)" [disabled]="isPenStateActive" color="primary"
           mat-raised-button>
     <mat-icon>crop_3_2</mat-icon>
-    {{ 'Rectangle' }}
+    Rectangle
   </button>
 </div>
 <div>
   <button (click)="onOpenDialog(ShapeEnum.Circle)" [disabled]="isPenStateActive" color="primary"
           mat-raised-button>
     <mat-icon>radio_button_unchecked</mat-icon>
-    {{ 'Cercle' }}
+    Cercle
   </button>
 </div>
 <div>
   <button (click)="onOpenDialog(ShapeEnum.Line)" [disabled]="isPenStateActive" color="primary"
           mat-raised-button>
     <mat-icon>show_chart</mat-icon>
-    {{ 'Ligne' }}
+    Ligne
   </button>
 </div>
 <div>
-  <button (click)="save()" color="accent"
+  <button (click)="save()" [hideText]="savingStatus.processing" [mtBasicSpinner]="savingStatus.processing"
+          color="accent"
           mat-raised-button>
     <mat-icon>save</mat-icon>
-    {{ 'Enregistrer' }}
+    Enregistrer
   </button>
 </div>
 <div>
-  <button (click)="load()" color="accent"
-          mat-raised-button>
+  <button (click)="load()" [hideText]="isLoading" [mtBasicSpinner]="isLoading"
+          color="accent" mat-raised-button>
     <mat-icon>open_in_browser</mat-icon>
-    {{ 'Ouvrir' }}
+    Ouvrir
+  </button>
+</div>
+<div>
+  <button (click)="reset()" color="warn" mat-raised-button>
+    <mat-icon>autorenew</mat-icon>
+    Réinitialiser
   </button>
 </div>
